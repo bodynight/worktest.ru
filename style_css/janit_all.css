@@ -1,0 +1,56 @@
+ 
+.dateblock{
+    padding:10px 10px;
+    position: relative;
+    align-content: center;
+    text-align: center;
+
+ }
+.btn-submit{
+	box-shadow:inset 0px 0px 14px -3px #f2fadc;
+	background:linear-gradient(to bottom, #d9d9d9 5%, #9ba892 100%);
+	background-color:#d9d9d9;
+	border-radius:8px;
+	border:1px solid #313131;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+    padding:5px 5px;
+    margin: 5 px;
+	text-decoration:none;
+}
+.btn-submit:hover {
+	background:linear-gradient(to bottom, #9ba892 5%, #d9d9d9 100%);
+	background-color:#9ba892;
+}
+.btn-submit:active {
+	position:relative;
+	top:1px;
+}
+
+.intrval{
+    border-radius:8px;
+    border:1px solid #313131;
+    width: 50;
+    font-size:14px;
+	font-weight:bold;
+    padding:5px 5px;
+    text-align: center;
+}
+
+.content1, .content2, .content3{
+    padding:10px 10px;
+}
+
+.data_table_date{
+    border-radius:8px;
+    border:1px solid #313131;
+    width: 150;
+    font-size:14px;
+	font-weight:bold;
+    padding:5px 5px;
+    text-align: center;
+}
