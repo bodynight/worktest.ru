@@ -9,7 +9,8 @@ console.log(obn);
 clearInterval(timerId);
 timerId = setInterval( updateblock, obn, obn);}
 
-$('td').click(function(){
+
+$(document).on('click', 'td', function () {
   if(this.id != 0){
 
   $.post('grafick.php',{id: this.id}, function(data){ $('#graf').empty();
@@ -17,3 +18,5 @@ $('td').click(function(){
                                                        console.log('est!');});
                     }
 });
+
+

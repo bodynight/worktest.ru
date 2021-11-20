@@ -243,6 +243,7 @@
 
 
       <script>
+
         $('#datetimepicker_select').datetimepicker({
             lang:'ru',
             dayOfWeekStart: 1,
