@@ -106,8 +106,11 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
 
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-sm-6">
                  <div id="container1" style="height: 400px; min-width: 310px"></div>
+            </div>
+            <div class="col-sm-6">
+                 <div id="container2" style="height: 400px; min-width: 310px"></div>
             </div>
         </div>
     </div>
@@ -139,7 +142,7 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
             inputEditDateFormat:'%Y-%m-%d %H:%M:%S',
             inputBoxWidth: 150,
             buttonTheme: {
-                width: 50
+                width: 40
             },
             buttons: [{
             count: 10,
@@ -194,6 +197,98 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
             });
 
 
+
+        // Create the chart
+Highcharts.stockChart('container2', {
+    chart: {
+        events: {
+            load: function () {
+
+                // set up the updating of the chart each second
+                var series = this.series[0];
+                setInterval(function () {
+                    var x = (new Date()).getTime(), // current time
+                        y = Math.round(Math.random() * 100);
+                    series.addPoint([x, y], true, true);
+                }, 1000);
+            }
+        }
+    },
+
+    time: {
+        useUTC: false
+    },
+
+    rangeSelector: {
+         inputDateFormat: '%Y-%m-%d %H:%M:%S',
+            inputEditDateFormat:'%Y-%m-%d %H:%M:%S',
+            inputBoxWidth: 150,
+            buttonTheme: {
+                width: 40
+            },
+            buttons: [{
+            count: 10,
+            type: 'second',
+            text: '10c'
+            },{
+            count: 20,
+            type: 'second',
+            text: '20c'
+            },{
+            count: 1,
+            type: 'minute',
+            text: '1M'
+            },{
+            count: 2,
+            type: 'minute',
+            text: '2M'
+            },{
+            count: 5,
+            type: 'minute',
+            text: '5M'
+            },{
+            count: 10,
+            type: 'minute',
+            text: '10M'
+            },{
+            count: 20,
+            type: 'minute',
+            text: '20M'
+            }, {
+            type: 'all',
+            text: 'All'
+            }],
+
+            inputEnabled: true,
+            selected: 7
+    },
+
+    title: {
+        text: 'Live random data'
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Random data',
+        data: (function () {
+            // generate an array of random data
+            var data = [],
+                time = (new Date()).getTime(),
+                i;
+
+            for (i = -999; i <= 0; i += 1) {
+                data.push([
+                    time + i * 1000,
+                    Math.round(Math.random() * 100)
+                ]);
+            }
+            return data;
+        }())
+    }]
+});
 
 </script>
 
