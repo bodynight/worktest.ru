@@ -20,5 +20,5 @@ echo $ar_file;
 
  <script>
   var i = 0;
-   window.setInterval(function(){location.reload();console.log(i);i++;},1000);//запуск самообновления лога
+   window.setInterval(function(){location.reload();console.log(i);i++;},3000);//запуск самообновления лога
  </script>
