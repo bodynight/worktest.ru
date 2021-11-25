@@ -71,19 +71,23 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
 
                 <div id="viewSelectWrap">
                     <h4>View Select</h4>
-                    <label><input id="rdb1" type="radio" name="toggler" value="divID-1" style="cursor:pointer;" checked/>1</label>
-                    <label><input id="rdb2" type="radio" name="toggler" value="divID-2" style="cursor:pointer;" />2</label>
+                    <label><input id="rdb1" type="radio" name="toggler" value="divID-1" style="cursor:pointer;" checked/>Static</label>
+                    <label><input id="rdb2" type="radio" name="toggler" value="divID-2" style="cursor:pointer;" />Dinamically</label>
                 </div>
         </div>
+                <div class="row">
+                    <div id="divID-1" class="toHide" style="position:relative;margin-bottom:-400px;"></div>
+                    <div id="divID-2" class="toHide" style="position:relative;top:-9999em;opacity:0;"></div>
+                </div>
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-sm-6">
                  <div id="container1" style="height: 400px; min-width: 310px"></div>
             </div>
             <div class="col-sm-6">
                  <div id="container2" style="height: 400px; min-width: 310px"></div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 
@@ -95,10 +99,22 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
     var data = <?php echo json_encode($arr_test);?>;
     var value_num = <?php echo json_encode($get_num_val) ?>;
     var get_num_val2 = <?php echo json_encode($get_num_val2) ?>;
-
+    $(function() {
+    $('[name=toggler]').click(function () {
+        $('.toHide').css({
+            top: '-9999em',
+            opacity: 0
+        });
+        var chartToShow = $(this).val();
+        $('#' + chartToShow).css({
+            top: 0,
+            opacity: 1
+        });
+    });
 
     // Create the chart
-    Highcharts.stockChart('container1', {
+    $('#divID-1').highcharts('StockChart',{
+    // Highcharts.stockChart('container1', {
 
         plotOptions: {
         series: {
@@ -171,9 +187,10 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
 
 
         // Create the chart
-Highcharts.stockChart('container2', {
-    chart: {
-        events: {
+        $('#divID-2').highcharts('StockChart',{
+        // Highcharts.stockChart('container2', {
+          chart: {
+            events: {
             load: function () {
                 // set up the updating of the chart each second
                 var series = this.series[0];
@@ -277,8 +294,7 @@ Highcharts.stockChart('container2', {
                      }
     }]
 });
-
-
+});
 </script>
 
 </body>
