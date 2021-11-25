@@ -13,3 +13,13 @@
   border: 3px solid;
 
 }
+
+.tb_tds {
+  color: #6666ff;
+  cursor: pointer;
+}
+
+.tb_tds:hover {
+  background-color: #ccf;
+  color: #52339a;
+}

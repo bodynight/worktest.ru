@@ -67,27 +67,24 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
   ?>
 
     <div class="container">
-        <div class="row">
+                <div class="row">
+                    <div id="viewSelectWrap">
+                        View Select:
 
-                <div id="viewSelectWrap">
-                    <h4>View Select</h4>
-                    <label><input id="rdb1" type="radio" name="toggler" value="divID-1" style="cursor:pointer;" checked/>Static</label>
-                    <label><input id="rdb2" type="radio" name="toggler" value="divID-2" style="cursor:pointer;" />Dinamically</label>
+                                <input class="form-check-input" id="rdb1" type="radio" name="toggler" value="divID-1" style="cursor:pointer;" checked/>
+                                <label class="form-check-label" for="flexRadioDefault1">Static</label>
+
+
+                                <input class="form-check-input" id="rdb2" type="radio" name="toggler" value="divID-2" style="cursor:pointer;" />
+                                <label class="form-check-label" for="flexRadioDefault1">Dinamically</label>
+
+                    </div>
                 </div>
-        </div>
+                </div>
                 <div class="row">
                     <div id="divID-1" class="toHide" style="position:relative;margin-bottom:-400px;"></div>
                     <div id="divID-2" class="toHide" style="position:relative;top:-9999em;opacity:0;"></div>
                 </div>
-
-        <!-- <div class="row">
-            <div class="col-sm-6">
-                 <div id="container1" style="height: 400px; min-width: 310px"></div>
-            </div>
-            <div class="col-sm-6">
-                 <div id="container2" style="height: 400px; min-width: 310px"></div>
-            </div>
-        </div> -->
     </div>
 
 

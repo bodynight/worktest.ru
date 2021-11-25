@@ -8,26 +8,20 @@
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style_css/style.css">
   <link rel="stylesheet" type="text/css" href="style_css/jquery.datetimepicker.css"/>
-  <link rel="stylesheet" href="style_css/my_style.css">
+  <link rel="stylesheet" href="style_css/style.css">
   <script src="jscript/jquery.datetimepicker.js"></script>
   <script src="https://code.highcharts.com/stock/highstock.js"></script>
   <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
   <script src="https://code.highcharts.com/stock/modules/data.js"></script>
   <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-
-
-
-
-
+  <link rel="stylesheet" href="style_css/my_style.css">
 
   <title>My Test</title>
 </head>
 <body>
 
   <div class="container">
-
       <div class="table-responsive-sm">
         <table class="table table-bordered table-sm">
             <form method="post">
@@ -54,10 +48,10 @@
                             value="Обновить"
                         />
 
-                        <input onclick="setobn(this)" name="radiobutton" type="radio" value="1000">1c
-                        <input onclick="setobn(this)" name="radiobutton" type="radio" value="5000">5c
-                        <input onclick="setobn(this)" name="radiobutton" type="radio" value="10000">10c
-                        <input onclick="setobn(this)" name="radiobutton" type="radio" value="60000">60c
+                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="1000">1c
+                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="5000">5c
+                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="10000">10c
+                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="60000">60c
                     </th>
                 </tr>
             </form>
@@ -220,7 +214,7 @@
                         $i = 0;
                        foreach ($array_tab1 as $value) {?>
 
-                      <td id = <?php echo $arrey_div1[$i]; ?> class = "text-center lh-1"> <?php echo $value; ?> </td>
+                      <td id = <?php echo $arrey_div1[$i]; ?> class = " text-center lh-1 "><div class="tb_tds"><?php echo $value; ?></div></td>
                 <?php $i++; } ?>
               </tr>
             </tbody>
@@ -257,18 +251,18 @@
 
               <tr class="tb_td">
                 <td  class="text-center table-success lh-1 tb_th_fs"></td>
-                <td id = 'pv_v' class="text-center lh-1"><?php echo $array_tab2[0]; ?> </td>
-                <td id = 'pv_i' class="text-center lh-1"><?php echo $array_tab2[1]; ?></td>
-                <td id = 'pv_p' class="text-center lh-1"><?php echo $array_tab2[2]; ?></td>
-                <td id = 'pv_r' class="text-center lh-1"><?php echo $array_tab2[3]; ?></td>
-                <td id = 'in_v1' class="text-center lh-1"><?php echo $array_tab2[4].' '.$array_tab2[5].' '.$array_tab2[6]; ?></td>
-                <td id = 'in_i1' class="text-center lh-1"><?php echo $array_tab2[7].' '.$array_tab2[8].' '.$array_tab2[9]; ?></td>
-                <td id = 'in_f' class="text-center lh-1"><?php echo $array_tab2[10]; ?></td>
-                <td id = 'in_t' class="text-center lh-1"><?php echo $array_tab2[11]; ?></td>
-                <td id = 'ac_v1' class="text-center lh-1"><?php echo $array_tab2[12].' '.$array_tab2[13].' '.$array_tab2[14]; ?></td>
-                <td id = 'ac_f' class="text-center lh-1"><?php echo $array_tab2[15]; ?></td>
-                <td id = 'in_sm' class="text-center lh-1"><?php echo $array_tab2[16]; ?></td>
-                <td id = 'in_of' class="text-center lh-1"><?php echo $array_tab2[17]; ?></td>
+                <td id = 'pv_v' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[0]; ?></div> </td>
+                <td id = 'pv_i' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[1]; ?></div></td>
+                <td id = 'pv_p' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[2]; ?></div></td>
+                <td id = 'pv_r' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[3]; ?></div></td>
+                <td id = 'in_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[4].' '.$array_tab2[5].' '.$array_tab2[6]; ?></div></td>
+                <td id = 'in_i1' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[7].' '.$array_tab2[8].' '.$array_tab2[9]; ?></div></td>
+                <td id = 'in_f' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[10]; ?></div></td>
+                <td id = 'in_t' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[11]; ?></div></td>
+                <td id = 'ac_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[12].' '.$array_tab2[13].' '.$array_tab2[14]; ?></div></td>
+                <td id = 'ac_f' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[15]; ?></div></td>
+                <td id = 'in_sm' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[16]; ?></div></td>
+                <td id = 'in_of' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[17]; ?></div></td>
               </tr>
 
           </table>
@@ -303,7 +297,7 @@
                   $i = 0;
                  foreach ($array_tab3 as $value) {?>
 
-                      <td id = <?php echo $arrey_div1[$i]; ?> class="text-center lh-1"> <?php echo $value; ?> </td>
+                      <td id = <?php echo $arrey_div1[$i]; ?> class="text-center lh-1"><div class="tb_tds"> <?php echo $value; ?></div> </td>
                 <?php $i++; } ?>
 
             </tr>
@@ -332,7 +326,7 @@
                         $i = 0;
                        foreach ($array_tab4 as $value) {?>
 
-                      <td id = <?php echo $arrey_div1[$i]; ?> class = "text-center lh-1"> <?php echo $value; ?> </td>
+                      <td id = <?php echo $arrey_div1[$i]; ?> class = "text-center lh-1"><div class="tb_tds"> <?php echo $value; ?></div> </td>
                 <?php $i++; } ?>
               </tr>
 
@@ -353,9 +347,9 @@
 
               <tr class="tb_td">
                 <td  class="text-center table-success lh-1"></td>
-                <td id = 'bms_pr' class="text-center lh-1"><?php echo $array_tab5[0]; ?> </td>
-                <td id = 'bms_u2m' class="text-center lh-1"><?php echo $array_tab5[1]; ?></td>
-                <td id = 'bms_i2m' class="text-center lh-1"><?php echo $array_tab5[2]; ?></td>
+                <td id = 'bms_pr' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab5[0]; ?> </div></td>
+                <td id = 'bms_u2m' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab5[1]; ?></div></td>
+                <td id = 'bms_i2m' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab5[2]; ?></div></td>
               </tr>
 
           </table>
@@ -390,7 +384,7 @@
                         $i = 0;
                        foreach ($array_tab6 as $value) {?>
 
-                      <td id = <?php echo $arrey_div1[$i]; ?> class = "text-center lh-1"> <?php echo $value; ?> </td>
+                      <td id = <?php echo $arrey_div1[$i]; ?> class = "text-center lh-1"> <div class="tb_tds"><?php echo $value; ?></div> </td>
                 <?php $i++; } ?>
               </tr>
 
