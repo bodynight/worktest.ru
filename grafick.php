@@ -82,8 +82,11 @@ $arr_test = create_arr_for_var($arrmain, $arr_assoc_var, $value_var);   // со�
                 </div>
                 </div>
                 <div class="row">
+                   <div class="col-sm-12 col-md-10 col-lg-8">
                     <div id="divID-1" class="toHide" style="position:relative;margin-bottom:-400px;"></div>
                     <div id="divID-2" class="toHide" style="position:relative;top:-9999em;opacity:0;"></div>
+                   </div>
+                   <div class="col-sm-12 col-md-2 col-lg-4"></div>
                 </div>
     </div>
 

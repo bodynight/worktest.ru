@@ -22,6 +22,8 @@
 <body>
 
   <div class="container">
+      <div class="row">
+      <div class="col-sm-12 col-md-10 col-lg-8">
       <div class="table-responsive-sm">
         <table class="table table-bordered table-sm">
             <form method="post">
@@ -57,18 +59,20 @@
             </form>
         </table>
       </div>
-
+      </div>
+      <div class="col-sm-12 col-md-10 col-lg-8">
         <form method="POST" action="index.php">
-          <div class="row">
+
             <div class="input-group">
             <span class="input-group-text fs-5">Key and Value</span>
             <input type="text" aria-label="Key" class="form-control fs-4" name="key_txt">
             <input type="text" aria-label="Value" class="form-control fs-4" name="value_txt">
             <input type="submit" class="btn btn-secondary" value="Отправить">
             </div>
-          </div>
-        </form>
 
+        </form>
+      </div>
+    </div>
       <div id="block">
       <?php
             $txt = "./data/mydata.txt";
@@ -84,108 +88,56 @@
           }
 
 
-
-
-           if(isset($_POST['datetime_select'])){ $find = $_POST['datetime_select'];
-            $inv_log = fopen("./logs/inv_log", "r") or die("Unable to open file!");
-
-                while(!feof($inv_log))
-                 { $row = fgets($inv_log);
-
-                    $pos = strpos($row, $find);
-
-                    if ($pos === false) {
-                       // echo "Строка '$find' не найдена";
-                    } else {
-                        // echo "Строка '$find' найдена<br>";
-                        $myarr = explode("\t", $row);//создание массива из строки вхождения
-                           }
-                   }
-            fclose($inv_log);
-           }else{
-            $lines = file("./logs/inv_log");
-            $myarr = explode("\t", $lines[count($lines)-1]);
+          function get_array($log){
+             if(isset($_POST['datetime_select'])){ $find = $_POST['datetime_select'];
+              $file = fopen($log, "r") or die("Unable to open file!");
+                  while(!feof($file))
+                   { $row = fgets($file);
+                      $pos = strpos($row, $find);
+                      if ($pos === false) {
+                      } else {
+                          $myarr = explode("\t", $row);//создание массива из строки вхождения
+                             }
+                     }
+              fclose($file);
+             }else{
+              $lines = file($log);
+              $myarr = explode("\t", $lines[count($lines)-1]);
+             }
+             return $myarr;
            }
 
+           $myarr = get_array("./logs/inv_log");
+           $dcdc_arr = get_array("./logs/dcdc_log");
 
 
-           if(isset($_POST['datetime_select'])){ $find = $_POST['datetime_select'];
-            $dcdc_log = fopen("./logs/dcdc_log", "r") or die("Unable to open file!");
 
-                while(!feof($dcdc_log))
-                 { $row = fgets($dcdc_log);
-
-                    $pos = strpos($row, $find);
-
-                    if ($pos === false) {
-                       // echo "Строка '$find' не найдена";
-                    } else {
-                        // echo "Строка '$find' найдена<br>";
-                        $dcdc_arr = explode("\t", $row);//создание массива из строки вхождения
-                           }
-                   }
-            fclose($dcdc_log);
-           }else{
-            $lines = file("./logs/dcdc_log");
-            $dcdc_arr = explode("\t", $lines[count($lines)-1]);
+           function get_array_table($vib, $arr, $value){
+                    $array_tab = array();
+                    $i = 0;
+                    foreach ($vib as $value) {
+                        $array_tab[$i] = $arr[$value];//создание масива данных для таб1
+                        $i++;
+                    }
+                return $array_tab;
            }
-
-
-
-
-
 
             $vib1 = array(1, 6, 7, 8, 9, 2, 3, 10, 11, 12, 13, 54);//выборка полей данных для таблицы 1
-            $array_tab1 = array();
-            $i = 0;
-            foreach ($vib1 as $value) {
-                $array_tab1[$i] = $myarr[$value];//создание масива данных для таб1
-                $i++;
-            }
-
             $vib2 = array(15, 16, 17, 18, 22, 23, 24, 25, 26, 27, 21, 19, 35, 36, 37, 34, 54, 50);//выборка полей данных для таблицы 2
-            $array_tab2 = array();
-            $i = 0;
-            foreach ($vib2 as $value) {
-                $array_tab2[$i] = $myarr[$value];//создание масива данных для таб2
-                $i++;
+            $vib3 = array(20, 28, 29, 30, 31, 32, 44, 51, 53);//выборка полей данных для таблицы 3
+            $vib4 = array(58, 59, 60, 61, 62);//выборка полей данных для таблицы 4
+            $vib5 = array(67, 68, 69);//выборка полей данных для таблицы 5
+            $vib6 = array(1,2,3,4,5,6,7,8,9,10,11,12,13);//выборка полей данных для таблицы 6
+            for ($i=1; $i < 6 ; $i++) {
+              ${'array_tab'.$i} = get_array_table(${'vib'.$i}, $myarr, $value);
             }
-
-             $vib3 = array(20, 28, 29, 30, 31, 32, 44, 51, 53);//выборка полей данных для таблицы 3
-            $array_tab3 = array();
-            $i = 0;
-            foreach ($vib3 as $value) {
-                $array_tab3[$i] = $myarr[$value];//создание масива данных для таб3
-                $i++;
-            }
-
-             $vib4 = array(58, 59, 60, 61, 62);//выборка полей данных для таблицы 4
-            $array_tab4 = array();
-            $i = 0;
-            foreach ($vib4 as $value) {
-                $array_tab4[$i] = $myarr[$value];//создание масива данных для таб4
-                $i++;
-            }
-
-             $vib5 = array(67, 68, 69);//выборка полей данных для таблицы 5
-            $array_tab5 = array();
-            $i = 0;
-            foreach ($vib5 as $value) {
-                $array_tab5[$i] = $myarr[$value];//создание масива данных для таб5
-                $i++;
-            }
-
-             $vib6 = array(1,2,3,4,5,6,7,8,9,10,11,12,13);//выборка полей данных для таблицы 6
-            $array_tab6 = array();
-            $i = 0;
-            foreach ($vib6 as $value) {
-                $array_tab6[$i] = $dcdc_arr[$value];//создание масива данных для таб6
-                $i++;
-            }?>
+            $array_tab6 = get_array_table($vib6, $dcdc_arr, $value);
+            ?>
 
 
-          <!-- <p>Date time: <?php echo date("Y-m-d H:i:s"); ?> </p> -->
 
+   <div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-8">
       <h4>Состояние инвертора</h4>
         <div class="table-responsive-sm">
           <table class="table table-bordered table-sm">
@@ -220,7 +172,9 @@
             </tbody>
           </table>
         </div>
+      </div>
 
+      <div class="col-sm-12 col-md-10 col-lg-8">
         <h4>Рабочие параметры инвертора</h4>
         <div class="table-responsive-sm">
           <table class="table table-bordered table-sm">
@@ -267,7 +221,9 @@
 
           </table>
         </div>
+      </div>
 
+      <div class="col-sm-12 col-md-10 col-lg-8">
         <h4>Производительность инвертора</h4>
         <div class="table-responsive-sm">
           <table class="table table-bordered table-sm">
@@ -304,7 +260,9 @@
 
           </table>
         </div>
-
+      </div>
+      <div class="col-sm-12 col-md-2 col-lg-2"></div>
+      <div class="col-sm-12 col-md-5 col-lg-4">
          <h4>Система заряда разряда батареи</h4>
         <div class="table-responsive-sm">
           <table class="table table-bordered table-sm">
@@ -332,7 +290,9 @@
 
           </table>
         </div>
+      </div>
 
+      <div class="col-sm-12 col-md-5 col-lg-4">
         <h4>Рабочие параметры Дизель Генератора</h4>
         <div class="table-responsive-sm">
           <table class="table table-bordered table-sm">
@@ -354,7 +314,9 @@
 
           </table>
         </div>
+      </div>
 
+      <div class="col-sm-12 col-md-10 col-lg-8">
         <h4>Рабочие параметры DC/DC преобразователя</h4>
         <div class="table-responsive-sm">
           <table class="table table-bordered table-sm">
@@ -390,7 +352,8 @@
 
           </table>
         </div>
-
+      </div>
+      </div>
        </div>
         <div id = "graf"></div>
       </div>
