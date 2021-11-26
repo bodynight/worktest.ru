@@ -17,9 +17,23 @@
 .tb_tds {
   color: #6666ff;
   cursor: pointer;
+  transition: all 0,25 ease;
 }
 
 .tb_tds:hover {
   background-color: #ccf;
   color: #52339a;
+}
+
+.kv {
+  color: #66f;
+  cursor: pointer;
+  transition: all 0,25 ease;
+}
+.kv:hover {
+  background-color: #ccf;
+  color: #52339a;
+}
+.ci {
+  cursor: pointer;
 }

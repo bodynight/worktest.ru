@@ -50,10 +50,10 @@
                             value="Обновить"
                         />
 
-                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="1000">1c
-                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="5000">5c
-                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="10000">10c
-                        <input class="form-check-input" onclick="setobn(this)" name="radiobutton" type="radio" value="60000">60c
+                        <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="1000">1c
+                        <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="5000">5c
+                        <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="10000">10c
+                        <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="60000">60c
                     </th>
                 </tr>
             </form>
@@ -65,8 +65,8 @@
 
             <div class="input-group">
             <span class="input-group-text fs-5">Key and Value</span>
-            <input type="text" aria-label="Key" class="form-control fs-4" name="key_txt">
-            <input type="text" aria-label="Value" class="form-control fs-4" name="value_txt">
+            <input type="text" aria-label="Key" class="form-control fs-4  kv" name="key_txt">
+            <input type="text" aria-label="Value" class="form-control fs-4  kv" name="value_txt">
             <input type="submit" class="btn btn-secondary" value="Отправить">
             </div>
 
