@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    
     <?php
 
     if(isset($_POST['id'])){$value_var = $_POST['id'];}//получаем переменную через ajax post
@@ -15,16 +16,7 @@
     include 'dataAssociate.php';
     $arr_assoc_var = $arrAssoc;
 
-    //создание ассоц массива для выборки по названию параметра то что в "value" для dcdc_log
-    // $arr_assoc_var = array( 'in_st' => 1,'in_in' => 6,'in_wr' => 7,'in_fl' => 8,'in_fs' => 9,'dc_in' => 2,'dc_wr' => 3,'ac_in' => 10,'ac_wr' => 11,
-    //                         'ac_fl' => 12,'ac_fs' => 13,'st_st' => 54,'pv_v' => 15,'pv_i' => 16,'pv_p' => 17,'pv_r' => 18,'in_v1' => 22,'in_v2' => 23,
-    //                         'in_v3' => 24,'in_i1' => 25,'in_i2' => 26,'in_i3' => 27,'in_f' => 21,'in_t' => 19,'ac_v1' => 35,'ac_v2' => 36,'ac_v3' => 37,
-    //                         'ac_f' => 34,'in_sm' => 54,'in_of' => 50,'ac_cs' => 20,'ac_s' => 28,'ac_p' => 29,'ac_q' => 30,'w_d' => 31,'w_t' => 32,
-    //                         'in_lp' => 44,'in_lr' => 51,'cs_sp' => 53,'bms_pr' => 67,'bms_u2m' => 68,'bms_i2m' => 69,'b_ref' => 58,'u2_m' => 59,'i2_m' => 60,
-    //                         'e_ch' => 61 ,'b_st' => 62,'u_dc2' => "1",'u_dc1' => "2",'i_dc_l1' => "3",'i_dc_l2' => "4",'i_dc_l3' => "5",'i_dc2' => "6",'t1' => "7",
-    //                         'dc_st' => "8",'pr_w' => "9",'idc2_mc' => "10",'idc2_md' => "11",'edc_c' => "12",'edc_d' => "13"
-    //                          );
-
+   
 $get_num_val = $arr_assoc_var[$value_var];//получаем номер выборки для массива по id
 $get_num_val2 = $arr_assoc_var[$value_var];
 
