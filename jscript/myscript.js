@@ -1,5 +1,4 @@
 
-
  var timerId = setInterval(function(){}, 1000);
 function updateblock(obn){ $("#block").load("index.php #block"); console.log(obn); }
 

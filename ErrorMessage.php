@@ -274,15 +274,71 @@ $arr_err = array(
         128 => 'Пониженное напряжение сети'
     )
 );
- 
-// Пример
 
-$mes_st = MESSAGE($pl_idAndInvAll[$key[$i]]['st_st'], $arr_cvim_state); // Проверка статуса связи $pl_idAndInvAll[$key[$i]]['st_st'] - содержит код ошибки или сообщения, может содержать сумму кодов ошибок.
-foreach($mes_st as  $key_st => $value_st){ // Идет перебор и сопоставление массива кодов ошибок
-	if ($value_st > 0){
-		$string2 = $arr_cvim_state[$value_st].'<br>'; // строка с расшифрованными ошибками или сообщениями 
-	}
+   
+    //создание ассоц массива для выборки по названию параметра то что в "value" для dcdc_log
+    $arr_assoc_var = array( 'in_st' => 1,'in_in' => 6,'in_wr' => 7,'in_fl' => 8,'in_fs' => 9,'dc_in' => 2,'dc_wr' => 3,'ac_in' => 10,'ac_wr' => 11,
+                            'ac_fl' => 12,'ac_fs' => 13,'st_st' => 54,'pv_v' => 15,'pv_i' => 16,'pv_p' => 17,'pv_r' => 18,'in_v1' => 22,'in_v2' => 23,
+                            'in_v3' => 24,'in_i1' => 25,'in_i2' => 26,'in_i3' => 27,'in_f' => 21,'in_t' => 19,'ac_v1' => 35,'ac_v2' => 36,'ac_v3' => 37,
+                            'ac_f' => 34,'in_sm' => 54,'in_of' => 50,'ac_cs' => 20,'ac_s' => 28,'ac_p' => 29,'ac_q' => 30,'w_d' => 31,'w_t' => 32,
+                            'in_lp' => 44,'in_lr' => 51,'cs_sp' => 53,'bms_pr' => 67,'bms_u2m' => 68,'bms_i2m' => 69,'b_ref' => 58,'u2_m' => 59,'i2_m' => 60,
+                            'e_ch' => 61 ,'b_st' => 62,'u_dc2' => "1",'u_dc1' => "2",'i_dc_l1' => "3",'i_dc_l2' => "4",'i_dc_l3' => "5",'i_dc2' => "6",'t1' => "7",
+                            'dc_st' => "8",'pr_w' => "9",'idc2_mc' => "10",'idc2_md' => "11",'edc_c' => "12",'edc_d' => "13"
+                             );
+
+   
+function get_st_error($val,$arr){
+    $mes_st = MESSAGE($val, $arr); 
+    foreach($mes_st as  $key_st => $value_st){ // Идет перебор и сопоставление массива кодов ошибок
+    	if ($value_st > 0){
+    		$string = $string.$arr[$value_st].'; '; // строка с расшифрованными ошибками или сообщениями 
+    	}
+    }
+    return $string;
 }
+
+$err_str_arr = array();
+if ($array_tab1[1] > 0){$err_str_arr += ['Информация инвертора' => get_st_error($array_tab1[1],$arr_mes['in_in'])];
+
+} 
+// echo $err_str_arr['in_in'];
+
+if ($array_tab1[2] > 0){$err_str_arr += ['Предупр. Инв.' => get_st_error($array_tab1[2],$arr_mes['in_wr'])];
+
+} 
+// echo $err_str_arr['in_wr'];
+
+if ($array_tab1[3] > 0){$err_str_arr += ['Ошибки Инв.' => get_st_error($array_tab1[3],$arr_err['in_fl'])];
+
+} 
+// echo $err_str_arr['in_fl'];
+
+if ($array_tab1[4] > 0){$err_str_arr += ['Ошибки самоподтв. Инв.' => get_st_error($array_tab1[4],$arr_err['in_fs'])];
+
+} 
+// echo $err_str_arr['in_fs'];
+
+if ($array_tab1[7] > 0){$err_str_arr += ['Инф. перем. тока' => get_st_error($array_tab1[7],$arr_mes['ac_in'])];
+
+} 
+// echo $err_str_arr['ac_in'];
+
+if ($array_tab1[8] > 0){$err_str_arr += ['Предупр. перем. тока' => get_st_error($array_tab1[8],$arr_mes['ac_wr'])];
+
+} 
+// echo $err_str_arr['ac_wr'];
+
+if ($array_tab1[8] > 0){$err_str_arr += ['Ошибки самоподтв. перем. тока' => get_st_error($array_tab1[8],$arr_err['ac_fs'])];
+
+} 
+// echo $err_str_arr['ac_fs'];
+
+if ($array_tab1[6] > 0){$err_str_arr += ['Предупр. пост. тока' => get_st_error($array_tab1[6],$arr_mes['dc_wr'])];
+
+} 
+// echo $err_str_arr['dc_wr'];
+
+
 
 
 ?>

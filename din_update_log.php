@@ -2,7 +2,9 @@
 
 function update_log($log){
   $ar_file = file($log);//из файла получаем массив строк
+$fLine = array_shift($ar_file);  //извлекаем первую строку
 array_push($ar_file, array_shift($ar_file));// первый эл-т масива переносим в конец
+array_unshift($ar_file, $fLine);// возвращаем на место первую строку
 
 $lastLine = $ar_file[count($ar_file) - 1];//получаем последнюю строку
 $ar_string = explode("\t", $lastLine);//создание массива из строки

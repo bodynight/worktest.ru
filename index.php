@@ -4,17 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="style_css/bootstrap.min.css" rel="stylesheet">
-  <script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
+  <script src="jscript/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" type="text/css" href="style_css/jquery.datetimepicker.css"/>
   <link rel="stylesheet" href="style_css/style.css">
   <script src="jscript/jquery.datetimepicker.js"></script>
-  <script src="https://code.highcharts.com/stock/highstock.js"></script>
-  <script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
-  <script src="https://code.highcharts.com/stock/modules/data.js"></script>
-  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+  <script src="jscript/highchart/highstock.js"></script>
+  <script src="jscript/highchart/export-data.js"></script>
+  <script src="jscript/highchart/data.js"></script>
+  <script src="jscript/highchart/exporting.js"></script>
   <link rel="stylesheet" href="style_css/my_style.css">
 
   <title>My Test</title>
@@ -102,7 +99,7 @@
               fclose($file);
              }else{
               $lines = file($log);
-              $myarr = explode("\t", $lines[count($lines)-1]);
+              $myarr = explode("\t", $lines[count($lines)-1]); //или последняя строка из массива
              }
              return $myarr;
            }
@@ -110,31 +107,24 @@
            $myarr = get_array("./logs/inv_log");
            $dcdc_arr = get_array("./logs/dcdc_log");
 
+            include 'ErrorMessage.php';
 
+            if ($err_str_arr) {
+              foreach ($err_str_arr as $key => $value) { ?>
+                <div class="row">
+                  <div class="col-sm-12 col-md-10 col-lg-8">
+                  <div class="alert alert-danger dalert" role="alert">
+                    <?php echo $key.': '.$value ; ?>
+                    </div>
+                  </div>
+                </div>
+                <?php
+               }
+              }
 
-           function get_array_table($vib, $arr, $value){
-                    $array_tab = array();
-                    $i = 0;
-                    foreach ($vib as $value) {
-                        $array_tab[$i] = $arr[$value];//создание масива данных для таб1
-                        $i++;
-                    }
-                return $array_tab;
-           }
-
-            $vib1 = array(1, 6, 7, 8, 9, 2, 3, 10, 11, 12, 13, 54);//выборка полей данных для таблицы 1
-            $vib2 = array(15, 16, 17, 18, 22, 23, 24, 25, 26, 27, 21, 19, 35, 36, 37, 34, 54, 50);//выборка полей данных для таблицы 2
-            $vib3 = array(20, 28, 29, 30, 31, 32, 44, 51, 53);//выборка полей данных для таблицы 3
-            $vib4 = array(58, 59, 60, 61, 62);//выборка полей данных для таблицы 4
-            $vib5 = array(67, 68, 69);//выборка полей данных для таблицы 5
-            $vib6 = array(1,2,3,4,5,6,7,8,9,10,11,12,13);//выборка полей данных для таблицы 6
-            for ($i=1; $i < 6 ; $i++) {
-              ${'array_tab'.$i} = get_array_table(${'vib'.$i}, $myarr, $value);
-            }
-            $array_tab6 = get_array_table($vib6, $dcdc_arr, $value);
+              include 'dataAssociate.php';
+            
             ?>
-
-
 
    <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-8">
@@ -143,7 +133,7 @@
           <table class="table table-bordered table-sm">
             <thead>
               <tr class="tb_tr">
-                <th class="text-center lh-1 align-middle table-success tb_th_fs" scope="col">Инв.</th>
+                <th class=  <?php if ($err_str_arr) {echo "\"text-center lh-1 align-middle tb_th_fs table-danger\"";} else{echo "\"text-center lh-1 align-middle tb_th_fs table-success\"";} ?>  scope="col">Инв.</th>
                 <th class="text-center lh-1" scope="col">Сост. инв.</th>
                 <th class="text-center lh-1" scope="col">Информ. сообщ.</th>
                 <th class="text-center lh-1" scope="col">Предуп. инв.</th>
@@ -160,14 +150,12 @@
             </thead>
             <tbody>
               <tr class="tb_td">
-                <td class="text-center lh-1 table-success"></td>
+                <td class=  <?php if ($err_str_arr) {echo "\"text-center lh-1 table-danger\"";} else{echo "\"text-center lh-1 table-success\"";} ?>></td>
                 <?php
                       $arrey_div1 = array("in_st", "in_in", "in_wr", "in_fl", "in_fs", "dc_in", "dc_wr", "ac_in", "ac_wr", "ac_fl", "ac_fs", "st_st");
-                        $i = 0;
-                       foreach ($array_tab1 as $value) {?>
-
-                      <td id = <?php echo $arrey_div1[$i]; ?> class = " text-center lh-1 "><div class="tb_tds"><?php echo $value; ?></div></td>
-                <?php $i++; } ?>
+                       foreach ($arrey_div1 as $value) {?>
+                      <td id = <?php echo $value; ?> class = " text-center lh-1 "><div class="tb_tds"><?php echo $myarr[$arrAssoc[$value]]; ?></div></td>
+                <?php  } ?>
               </tr>
             </tbody>
           </table>
@@ -202,22 +190,22 @@
                 <th class="text-center lh-1" scope="col" >InvOFF </th>
               </tr>
             </thead>
-
               <tr class="tb_td">
                 <td  class="text-center table-success lh-1 tb_th_fs"></td>
-                <td id = 'pv_v' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[0]; ?></div> </td>
-                <td id = 'pv_i' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[1]; ?></div></td>
-                <td id = 'pv_p' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[2]; ?></div></td>
-                <td id = 'pv_r' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[3]; ?></div></td>
-                <td id = 'in_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[4].' '.$array_tab2[5].' '.$array_tab2[6]; ?></div></td>
-                <td id = 'in_i1' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[7].' '.$array_tab2[8].' '.$array_tab2[9]; ?></div></td>
-                <td id = 'in_f' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[10]; ?></div></td>
-                <td id = 'in_t' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[11]; ?></div></td>
-                <td id = 'ac_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[12].' '.$array_tab2[13].' '.$array_tab2[14]; ?></div></td>
-                <td id = 'ac_f' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[15]; ?></div></td>
-                <td id = 'in_sm' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[16]; ?></div></td>
-                <td id = 'in_of' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab2[17]; ?></div></td>
-              </tr>
+                <td id = 'pv_v' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['pv_v']]; ?></div> </td>
+                <td id = 'pv_i' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['pv_i']]; ?></div></td>
+                <td id = 'pv_p' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['pv_p']]; ?></div></td>
+                <td id = 'pv_r' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['pv_r']]; ?></div></td>
+                <td id = 'in_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_v1']].' '.$myarr[$arrAssoc['in_v2']].' '.$myarr[$arrAssoc['in_v3']]; ?></div></td>
+                <td id = 'in_i1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_i1']].' '.$myarr[$arrAssoc['in_i2']].' '.$myarr[$arrAssoc['in_i3']]; ?></div></td>
+                <td id = 'in_f' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_f']]; ?></div></td>
+                <td id = 'in_t' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_t']]; ?></div></td>
+                <td id = 'ac_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['ac_v1']].' '.$myarr[$arrAssoc['ac_v2']].' '.$myarr[$arrAssoc['ac_v3']]; ?></div></td>
+                <td id = 'ac_f' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['ac_f']]; ?></div></td>
+                <td id = 'in_sm' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_sm']]; ?></div></td>
+                <td id = 'in_of' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_of']]; ?></div></td>
+             </tr>
+              
 
           </table>
         </div>
@@ -250,12 +238,9 @@
                 <td class="text-center table-success lh-1"></td>
                 <?php
                 $arrey_div1 = array("ac_cs", "ac_s", "ac_p", "ac_q", "w_d", "w_t", "in_lp", "in_lr",  "cs_sp");
-                  $i = 0;
-                 foreach ($array_tab3 as $value) {?>
-
-                      <td id = <?php echo $arrey_div1[$i]; ?> class="text-center lh-1"><div class="tb_tds"> <?php echo $value; ?></div> </td>
-                <?php $i++; } ?>
-
+                 foreach ($arrey_div1 as $value) {?>
+                      <td id = <?php echo $value; ?> class="text-center lh-1"><div class="tb_tds"> <?php echo $myarr[$arrAssoc[$value]]; ?></div> </td>
+                <?php  } ?>
             </tr>
 
           </table>
@@ -281,11 +266,9 @@
                 <td  class="text-center table-success lh-1"></td>
                 <?php
                       $arrey_div1 = array("b_ref", "u2_m", "i2_m", "e_ch", "b_st");
-                        $i = 0;
-                       foreach ($array_tab4 as $value) {?>
-
-                      <td id = <?php echo $arrey_div1[$i]; ?> class = "text-center lh-1"><div class="tb_tds"> <?php echo $value; ?></div> </td>
-                <?php $i++; } ?>
+                       foreach ($arrey_div1 as $value) {?>
+                      <td id = <?php echo $value; ?> class = "text-center lh-1"><div class="tb_tds"> <?php echo $myarr[$arrAssoc[$value]]; ?></div> </td>
+                <?php } ?>
               </tr>
 
           </table>
@@ -307,9 +290,9 @@
 
               <tr class="tb_td">
                 <td  class="text-center table-success lh-1"></td>
-                <td id = 'bms_pr' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab5[0]; ?> </div></td>
-                <td id = 'bms_u2m' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab5[1]; ?></div></td>
-                <td id = 'bms_i2m' class="text-center lh-1"><div class="tb_tds"><?php echo $array_tab5[2]; ?></div></td>
+                <td id = 'bms_pr' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['bms_pr']] ?> </div></td>
+                <td id = 'bms_u2m' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['bms_u2m']] ?></div></td>
+                <td id = 'bms_i2m' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['bms_i2m']] ?></div></td>
               </tr>
 
           </table>
@@ -343,11 +326,9 @@
                 <td  class="text-center table-success lh-1"></td>
                 <?php
                       $arrey_div1 = array("u_dc2", "u_dc1", "i_dc_l1", "i_dc_l2", "i_dc_l3", "i_dc2", "t1", "dc_st", "pr_w", "idc2_mc", "idc2_md", "edc_c", "edc_d");
-                        $i = 0;
-                       foreach ($array_tab6 as $value) {?>
-
-                      <td id = <?php echo $arrey_div1[$i]; ?> class = "text-center lh-1"> <div class="tb_tds"><?php echo $value; ?></div> </td>
-                <?php $i++; } ?>
+                       foreach ($arrey_div1 as $value) {?>
+                      <td id = <?php echo $value ?> class = "text-center lh-1"> <div class="tb_tds"><?php echo $dcdc_arr[(int)$arrAssoc[$value]]; ?></div> </td>
+                <?php } ?>
               </tr>
 
           </table>
@@ -369,5 +350,6 @@
     </script>
     <script src="jscript/myscript.js"></script>
     <script src="jscript/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
