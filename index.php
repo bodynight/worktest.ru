@@ -107,6 +107,8 @@
            $myarr = get_array("./logs/inv_log");
            $dcdc_arr = get_array("./logs/dcdc_log");
 
+            include 'dataAssociate.php';
+
             include 'ErrorMessage.php';
 
             if ($err_str_arr) {
@@ -122,7 +124,7 @@
                }
               }
 
-              include 'dataAssociate.php';
+              
             
             ?>
 
