@@ -148,6 +148,15 @@
     if ($found[0] == 'BMS_status'){
         $arrAssoc += ['b_st' => $i];
     }
+    if ($found[0] == 'P_fix'){
+        $arrAssoc += ['p_fx' => $i];
+    }
+    if ($found[0] == 'P_ac_10'){
+        $arrAssoc += ['p_ac_10' => $i];
+    }
+    if ($found[0] == 'F_ac_10'){
+        $arrAssoc += ['f_ac_10' => $i];
+    }
     $i++;  
   }
 

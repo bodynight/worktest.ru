@@ -1,10 +1,30 @@
+ 
 .tb_tr  {
   font-size: 10px;
   color: gray;
   border: 3px solid;
   vertical-align: middle;
-
 }
+
+.tb_tr_t  {
+  font-size: 15px;
+  border: 3px solid;
+  vertical-align: middle;
+}
+
+.cs_z {
+   width: 5%;
+}
+
+.cs_zi {
+  width: 55px;
+}
+
+.tb_th_fs_t {
+  width: 30%;
+}
+
+
 .tb_th_fs {
   width: 30px;
 }
@@ -43,4 +63,63 @@
   height: 20px;
   padding: 2px;
   vertical-align: middle;
+}
+.form-control-sm, .alert-success {
+   max-width: 400px;
+   padding: 20px;
+   margin: 0 auto;
+}
+
+.navbar-light {
+   background-color: #90D7EE;
+}
+
+.nl-a {
+   color: #0A06A7;
+}
+
+.nl-a:hover {
+  background-color: #ccf;
+  color: #52339a;
+}
+
+.navbar-brand {
+  font-size: 20px;
+}
+
+
+.btn-outline-primary {
+  color: #52339a;
+  font-size: 12px;
+
+}
+
+.sel_cl {
+  color: #52339a;
+  font-size: 15px;
+}
+
+.sel_ {
+  font-size: 15px;
+}
+
+.sel_m {
+  
+  
+  font-size: 15px;
+}
+
+.trr {
+  width: 30%;
+}
+
+.sel_2 {
+  vertical-align: middle;
+}
+
+
+.rro {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
 }

@@ -17,8 +17,10 @@
   <title>My Test</title>
 </head>
 <body>
+   <?php require 'db.php'; ?>
 
   <div class="container">
+      <?php require "navbar.php"; ?>
       <div class="row">
       <div class="col-sm-12 col-md-10 col-lg-8">
       <div class="table-responsive-sm">
@@ -57,18 +59,21 @@
         </table>
       </div>
       </div>
-      <div class="col-sm-12 col-md-10 col-lg-8">
-        <form method="POST" action="index.php">
+      <?php if( isset($_SESSION['logged_user']))
+            { ?>
+                <div class="col-sm-12 col-md-10 col-lg-8">
+                  <form method="POST" action="index.php">
 
-            <div class="input-group">
-            <span class="input-group-text fs-5">Key and Value</span>
-            <input type="text" aria-label="Key" class="form-control fs-4  kv" name="key_txt">
-            <input type="text" aria-label="Value" class="form-control fs-4  kv" name="value_txt">
-            <input type="submit" class="btn btn-secondary" value="Отправить">
-            </div>
+                      <div class="input-group">
+                      <span class="input-group-text fs-5">Key and Value</span>
+                      <input type="text" aria-label="Key" class="form-control fs-4  kv" name="key_txt">
+                      <input type="text" aria-label="Value" class="form-control fs-4  kv" name="value_txt">
+                      <input type="submit" class="btn btn-secondary" value="Отправить">
+                      </div>
 
-        </form>
-      </div>
+                  </form>
+                </div>
+      <?php } ?>    
     </div>
       <div id="block">
       <?php
