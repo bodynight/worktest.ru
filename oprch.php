@@ -47,29 +47,13 @@
        ?>
   <br>
 
-  <div class="row">
-        <div class="col-sm-12 col-md-10 col-lg-8">
-            <table class="table table-bordered">
-               <tbody>
-                  <tr class="tb_tr_t table-warning">
-                    <td class="fw-bold text-center">
-                      Авто обновление
-                      <button type="button" onclick="setobn_oprch()" class="btn btn-outline-primary fw-bold">Включить</button>
-                      <button type="button" onclick="setobnoff()"class="btn btn-outline-secondary fw-bold">Выключить</button> 
-                    </td>
-                  </tr>
-               </tbody>  
-            </table>
-        </div>
-  </div> 
-
    <?php 
-      if( isset($sel_oprh) )
+      if( isset($_SESSION['sel_oprh']) )
       { ?>
         <div class="row">
           <div class="col-sm-12 col-md-10 col-lg-8">
             <div class="alert alert-info sel_" role="alert">
-             Выбранный режим работы:<br> <?php echo $sel_oprh; ?>
+             Выбранный режим работы:<br> <?php echo $_SESSION['sel_oprh']; ?>
             </div>
           </div>
         </div>
@@ -135,6 +119,23 @@
         }
   }
      ?>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-10 col-lg-8">
+            <table class="table table-bordered">
+               <tbody>
+                  <tr class="tb_tr_t table-warning">
+                    <td class="fw-bold text-center">
+                      Авто обновление
+                      <button type="button" onclick="setobn_oprch(this)" class="btn btn-outline-primary fw-bold" value="<?php echo $_SESSION['sel_oprh']; ?>" >Включить</button>
+                      <button type="button" onclick="setobnoff()"class="btn btn-outline-secondary fw-bold">Выключить</button> 
+                    </td>
+                  </tr>
+               </tbody>  
+            </table>
+        </div>
+      </div>     
+
 <div id="block">  
   <?php
 
@@ -315,9 +316,98 @@
         </div>
 <?php } ?>
 </div>
-  <script src="jscript/myscript_oprch.js"></script>
   <script src="jscript/bootstrap.bundle.min.js"></script>
+  <script>
+    var timerIdo = setInterval(function(){}, 1000);
+    var arrAss = <?php echo json_encode($arrAssoc);?>;
     
+
+    function updateblock_oprch_off(obno)
+    {
+      $.get('logs/inv_log', function(data)
+       {
+          // Split the lines
+          lines = data.split('\n');
+          //проверка последнего эл-та массива если "" удаляем эл-т
+          if (lines[lines.length-1] == "") {lines.pop();}
+          lastline = lines[lines.length-1];
+          var items = lastline.split('\t');
+           $("#p_ac_10").text( items[arrAss['p_ac_10']] );
+           $("#f_ac_10").text( items[arrAss['f_ac_10']] );
+       });
+    }
+
+    function updateblock_oprch_pf_in(obno)
+    {
+      $.get('logs/inv_log', function(data)
+       {
+          // Split the lines
+          lines = data.split('\n');
+          //проверка последнего эл-та массива если "" удаляем эл-т
+          if (lines[lines.length-1] == "") {lines.pop();}
+          lastline = lines[lines.length-1];
+          var items = lastline.split('\t');
+           $("#ac_p").text( items[arrAss['ac_p']] );
+           $("#in_f").text( items[arrAss['in_f']] );
+           $("#p_fx").text( items[arrAss['p_fx']] );
+           $("#in_lp").text( items[arrAss['in_lp']] );
+       });
+    }
+
+    function updateblock_oprch_pf_an(obno)
+    {
+      $.get('logs/inv_log', function(data)
+       {
+          // Split the lines
+          lines = data.split('\n');
+          //проверка последнего эл-та массива если "" удаляем эл-т
+          if (lines[lines.length-1] == "") {lines.pop();}
+          lastline = lines[lines.length-1];
+          var items = lastline.split('\t');
+           $("#p_ac_10").text( items[arrAss['p_ac_10']] );
+           $("#f_ac_10").text( items[arrAss['f_ac_10']] );
+           $("#p_fx").text( items[arrAss['p_fx']] );
+           $("#in_lp").text( items[arrAss['in_lp']] );
+       });
+    }
+
+    function setobn_oprch(val)
+    {
+       sessionStorage.param1 = val.value;
+       var obno = 1000;
+       var sel_oprh = val.value;
+       clearInterval(timerIdo);
+
+       if(sel_oprh == 'Выкл.')
+       {
+          timerIdo = setInterval( updateblock_oprch_off, obno, obno);  
+       }
+
+       if(sel_oprh == 'P,F - инвертор' || sel_oprh == 'Отладка P, F - инвертор')
+       {
+          timerIdo = setInterval( updateblock_oprch_pf_in, obno, obno);  
+       }
+
+       if(sel_oprh == 'P,F - анализатор' || sel_oprh == 'Отладка P,F - анализатор')
+       {
+          timerIdo = setInterval( updateblock_oprch_pf_an, obno, obno);  
+       }
+    }
+
+    function setobnoff()
+    {
+      clearInterval(timerIdo);
+      sessionStorage.param1 = "";
+      // Перезагрузить текущую страницу
+      document.location.reload();
+
+    }
+    if(sessionStorage.param1 != "")
+    {
+      var x = {value: sessionStorage.param1};
+      setobn_oprch(x);
+    } 
+  </script>  
 </body>
 </html>
 

@@ -2,7 +2,7 @@
 
   $f_read = read_oprch('F');
   $p_read = read_oprch('P');
-  echo $_SESSION['sel_oprh'].'<br>';
+  
  ?>
 
 <div class="col-sm-12 col-md-10 col-lg-8">
@@ -27,7 +27,7 @@
             </th>
             <th scope="col" colspan="3">
 
-              <button name="do_select" type="submit" class="btn btn-secondary btn-lg text-center">Применить/Сброс</button>
+              <button name="do_select" type="submit" class="btn btn-secondary btn-lg text-center">Применить</button>
             
             </th>
             </form>
@@ -42,7 +42,11 @@
           </tr>
           <tr class="tb_tr_t">
             <td class="tb_th_fs_t">Мощность (InvTotalTruePower)</td>
-            <td class="cs_z"><?php echo $myarr[$arrAssoc['ac_p']]; ?></td>
+            <td class="cs_z">
+              <div id="ac_p">
+                <?php echo $myarr[$arrAssoc['ac_p']]; ?>
+              </div>    
+            </td>
             <td class="cs_z">кВт</td>
             <form action="oprch.php" method="post">
             <td class="tb_th_fs_t">Задаваемая мощность</td>
@@ -56,7 +60,11 @@
           </tr>
           <tr class="tb_tr_t">
             <td>Частота (InvFrequency)</td>
-            <td class="cs_z"><?php echo $myarr[$arrAssoc['in_f']]; ?></td>
+            <td class="cs_z">
+              <div id="in_f">
+                <?php echo $myarr[$arrAssoc['in_f']]; ?>
+              </div>                  
+            </td>
             <td class="cs_z">Гц</td>
             <td>Задаваемая частота</td>
             <td>
@@ -73,12 +81,20 @@
           </tr>
           <tr class="tb_tr_t">
             <td>Зафиксированная мощность (P_fix)</td>
-            <td><?php echo $myarr[$arrAssoc['p_fx']]; ?></td>
+            <td>
+              <div id="p_fx">
+                <?php echo $myarr[$arrAssoc['p_fx']]; ?>
+              </div>    
+            </td>
             <td colspan="5">кВт</td>
           </tr>
           <tr class="tb_tr_t">
             <td>Расчетная мощность (True_Power_Limit)</td>
-            <td><?php echo $myarr[$arrAssoc['in_lp']]; ?></td>
+            <td>
+              <div id="in_lp">
+                <?php echo $myarr[$arrAssoc['in_lp']]; ?>
+              </div>    
+            </td>
             <td colspan="5">кВт</td>
           </tr>
         </tbody>

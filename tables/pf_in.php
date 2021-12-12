@@ -30,13 +30,21 @@
           </tr>
           <tr class="tb_tr_t">
             <td class="tb_th_fs_t">Мощность (InvTotalTruePower)</td>
-            <td class="text-end"><?php echo $myarr[$arrAssoc['ac_p']]; ?></td>
+            <td class="text-end">
+              <div id="ac_p">
+                <?php echo $myarr[$arrAssoc['ac_p']]; ?>
+              </div>    
+            </td>
             <td>кВт</td>
             
           </tr>
           <tr class="tb_tr_t">
             <td>Частота (InvFrequency)</td>
-            <td class="text-end"><?php echo $myarr[$arrAssoc['in_f']]; ?></td>
+            <td class="text-end">
+              <div id="in_f">
+                <?php echo $myarr[$arrAssoc['in_f']]; ?>
+              </div>    
+            </td>
             <td>Гц</td>
             
           </tr>
@@ -45,12 +53,20 @@
           </tr>
           <tr class="tb_tr_t">
             <td>Зафиксированная мощность (P_fix)</td>
-            <td class="text-end"><?php echo $myarr[$arrAssoc['p_fx']]; ?></td>
+            <td class="text-end">
+              <div id="p_fx">
+                <?php echo $myarr[$arrAssoc['p_fx']]; ?>
+              </div>    
+            </td>
             <td>кВт</td>
           </tr>
           <tr class="tb_tr_t">
             <td>Расчетная мощность (TruePowerLimitPoint)</td>
-            <td class="text-end"><?php echo $myarr[$arrAssoc['in_lp']]; ?></td>
+            <td class="text-end">
+              <div id="in_lp">
+                <?php echo $myarr[$arrAssoc['in_lp']]; ?>
+              </div>    
+            </td>
             <td >кВт</td>
           </tr>
         </tbody>

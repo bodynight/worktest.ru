@@ -30,13 +30,22 @@
           </tr>
           <tr class="tb_tr_t">
             <td class="tb_th_fs_t">Мощность (P_ac_10)</td>
-            <td class="text-end"><?php echo $myarr[$arrAssoc['p_ac_10']]; ?></td>
+            
+              <td class="text-end">
+                <div id="p_ac_10">
+                  <?php echo $myarr[$arrAssoc['p_ac_10']]; ?>
+                </div>
+              </td>
             <td>кВт</td>
             
           </tr>
           <tr class="tb_tr_t">
             <td>Частота (F_AC_10)</td>
-            <td class="text-end"><?php echo $myarr[$arrAssoc['f_ac_10']]; ?></td>
+              <td class="text-end">
+                <div id="f_ac_10">
+                  <?php echo $myarr[$arrAssoc['f_ac_10']]; ?>
+                </div>
+              </td>
             <td>Гц</td>
         </tbody>
       </table>
