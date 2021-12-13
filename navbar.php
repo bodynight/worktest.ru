@@ -28,7 +28,7 @@
                            </li> <?php
                         } ?>
                            <li class="nav-item">
-                              <a class="nav-link nl-a" aria-current="page" href="logout.php">Выход</a>
+                              <a class="nav-link nl-a" id="logout" aria-current="page" href="logout.php">Выход</a>
                            </li> <?php
                      }else
                      { ?>

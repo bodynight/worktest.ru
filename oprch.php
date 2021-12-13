@@ -47,7 +47,7 @@
        ?>
   <br>
 
-   <?php 
+   <?php
       if( isset($_SESSION['sel_oprh']) )
       { ?>
         <div class="row">
@@ -127,8 +127,14 @@
                   <tr class="tb_tr_t table-warning">
                     <td class="fw-bold text-center">
                       Авто обновление
-                      <button type="button" onclick="setobn_oprch(this)" class="btn btn-outline-primary fw-bold" value="<?php echo $_SESSION['sel_oprh']; ?>" >Включить</button>
-                      <button type="button" onclick="setobnoff()"class="btn btn-outline-secondary fw-bold">Выключить</button> 
+                      <div class="btn-group">
+                      <input type="radio" onclick="setobn_oprch(this)" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" value="<?php echo $_SESSION['sel_oprh']; ?>" >
+                      <label class="btn btn-outline-success" for="success-outlined">Включить</label>
+
+                      <input type="radio" onclick="setobnoff()" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked>
+                      <label class="btn btn-outline-danger" for="danger-outlined">Выключить</label>
+                      <!-- <button type="button" onclick="setobn_oprch(this)" class="btn btn-outline-primary fw-bold" value="<?php echo $_SESSION['sel_oprh']; ?>" >Включить</button>
+                      <button type="button" onclick="setobnoff()"class="btn btn-outline-secondary fw-bold">Выключить</button>  -->
                     </td>
                   </tr>
                </tbody>  
@@ -257,6 +263,7 @@
     } ?>
 
     <?php
+
     if( !isset($_SESSION['sel_oprh']) )
     {
       preg_match('/<m>(.*)<\/m>/isU', f_read_oprch(), $matches);
@@ -280,13 +287,13 @@
         require "tables/pf_an.php";
       }
 
-      if( preg_match('/<m>.(debug [fp]=)/isU', f_read_oprch(), $matches) )
+      if( preg_match('/debug [fp]=/isU', $status_oprch, $matches) )
       {
         $_SESSION['sel_oprh'] = 'Отладка P, F - инвертор';
         require "tables/opf_in.php";
       }
 
-      if( preg_match('/<m>.(debug_ac_10 [fp]=)/isU', f_read_oprch(), $matches) )
+      if( preg_match('/debug_ac_10 [fp]=/isU', $status_oprch, $matches) )
       {
         $_SESSION['sel_oprh'] = 'Отладка P,F - анализатор';
         require "tables/opf_an.php";
@@ -374,6 +381,7 @@
     function setobn_oprch(val)
     {
        sessionStorage.param1 = val.value;
+       $('input[name="options-outlined"][id="success-outlined"]').prop('checked', true);
        var obno = 1000;
        var sel_oprh = val.value;
        clearInterval(timerIdo);
@@ -402,11 +410,16 @@
       document.location.reload();
 
     }
-    if(sessionStorage.param1 != "")
+    if( typeof variable != 'undefined' && sessionStorage.param1 != "")
     {
+      $('input[name="options-outlined"][id="danger-outlined"]').prop('checked', true);
       var x = {value: sessionStorage.param1};
       setobn_oprch(x);
-    } 
+    }
+
+    $( "#logout" ).on( "click", function() {
+      sessionStorage.clear();
+    }); 
   </script>  
 </body>
 </html>
