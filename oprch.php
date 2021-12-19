@@ -133,8 +133,6 @@
 
                       <input type="radio" onclick="setobnoff()" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked>
                       <label class="btn btn-outline-danger" for="danger-outlined">Выключить</label>
-                      <!-- <button type="button" onclick="setobn_oprch(this)" class="btn btn-outline-primary fw-bold" value="<?php echo $_SESSION['sel_oprh']; ?>" >Включить</button>
-                      <button type="button" onclick="setobnoff()"class="btn btn-outline-secondary fw-bold">Выключить</button>  -->
                     </td>
                   </tr>
                </tbody>  
@@ -408,9 +406,13 @@
       sessionStorage.param1 = "";
       // Перезагрузить текущую страницу
       document.location.reload();
-
     }
-    if( typeof variable != 'undefined' && sessionStorage.param1 != "")
+
+    $( "#do_sel" ).on( "click", function() {
+      setobnoff();
+    });
+
+    if( typeof sessionStorage.param1 != 'undefined' && sessionStorage.param1 != "")
     {
       $('input[name="options-outlined"][id="danger-outlined"]').prop('checked', true);
       var x = {value: sessionStorage.param1};

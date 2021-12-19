@@ -177,8 +177,8 @@
               <tr class="tb_tr">
                 <th class="align-middle table-success text-center lh-1 tb_th_fs" scope="col" rowspan="2">Инв.</th>
                 <th class="text-center lh-1" scope="col" colspan="4">Постоянный ток</th>
-                <th class="text-center lh-1" scope="col" colspan="4">Инвертор</th>
-                <th class="text-center lh-1" scope="col" colspan="2">Переменный ток</th>
+                <th class="text-center lh-1" scope="col" colspan="8">Инвертор</th>
+                <th class="text-center lh-1" scope="col" colspan="4">Переменный ток</th>
                 <th class="text-center lh-1" scope="col" colspan="2">Доп. данные</th>
               </tr>
 
@@ -187,11 +187,11 @@
                 <th class="text-center lh-1" scope="col" >I dc</th>
                 <th class="text-center lh-1" scope="col" >P dc</th>
                 <th class="text-center lh-1" scope="col" >R изол.</th>
-                <th class="text-center lh-1" scope="col" >U inv <br> L1 L2 L3 </th>
-                <th class="text-center lh-1" scope="col" >I inv <br> L1 L2 L3 </th>
+                <th class="text-center lh-1" scope="col" colspan="3" >U inv <br> L1 L2 L3 </th>
+                <th class="text-center lh-1" scope="col" colspan="3">I inv <br> L1 L2 L3 </th>
                 <th class="text-center lh-1" scope="col"  >F inv </th>
                 <th class="text-center lh-1" scope="col"    >T в шкафу</th>
-                <th class="text-center lh-1" scope="col" >U ac <br> L1 L2 L3 </th>
+                <th class="text-center lh-1" scope="col" colspan="3" >U ac <br> L1 L2 L3 </th>
                 <th class="text-center lh-1" scope="col"  >F ac </th>
                 <th class="text-center lh-1" scope="col" >StartMode </th>
                 <th class="text-center lh-1" scope="col" >InvOFF </th>
@@ -203,11 +203,17 @@
                 <td id = 'pv_i' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['pv_i']]; ?></div></td>
                 <td id = 'pv_p' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['pv_p']]; ?></div></td>
                 <td id = 'pv_r' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['pv_r']]; ?></div></td>
-                <td id = 'in_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_v1']].' '.$myarr[$arrAssoc['in_v2']].' '.$myarr[$arrAssoc['in_v3']]; ?></div></td>
-                <td id = 'in_i1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_i1']].' '.$myarr[$arrAssoc['in_i2']].' '.$myarr[$arrAssoc['in_i3']]; ?></div></td>
+                <td id = 'in_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_v1']]; ?></div></td>
+                <td id = 'in_v2' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_v2']]; ?></div></td>
+                <td id = 'in_v3' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_v3']]; ?></div></td>
+                <td id = 'in_i1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_i1']]; ?></div></td>
+                <td id = 'in_i2' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_i2']]; ?></div></td>
+                <td id = 'in_i3' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_i3']]; ?></div></td>
                 <td id = 'in_f' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_f']]; ?></div></td>
                 <td id = 'in_t' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_t']]; ?></div></td>
-                <td id = 'ac_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['ac_v1']].' '.$myarr[$arrAssoc['ac_v2']].' '.$myarr[$arrAssoc['ac_v3']]; ?></div></td>
+                <td id = 'ac_v1' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['ac_v1']]; ?></div></td>
+                <td id = 'ac_v2' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['ac_v2']]; ?></div></td>
+                <td id = 'ac_v3' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['ac_v3']]; ?></div></td>
                 <td id = 'ac_f' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['ac_f']]; ?></div></td>
                 <td id = 'in_sm' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_sm']]; ?></div></td>
                 <td id = 'in_of' class="text-center lh-1"><div class="tb_tds"><?php echo $myarr[$arrAssoc['in_of']]; ?></div></td>

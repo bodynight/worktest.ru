@@ -27,7 +27,7 @@
             </th>
             <th scope="col" colspan="3">
 
-              <button name="do_select" type="submit" class="btn btn-secondary btn-lg text-center">Применить</button>
+              <button name="do_select" type="submit" class="btn btn-secondary btn-lg text-center" id="do_sel">Применить</button>
             
             </th>
             </form>
@@ -102,3 +102,12 @@
 
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-10 col-lg-8">
+        <div id="container" style="height: 400px; min-width: 310px"></div>
+      </div>
+    </div>
+
+    <?php 
+      include "./graphik/chart_pf_in.php";
+     ?>

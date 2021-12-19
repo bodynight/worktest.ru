@@ -1,5 +1,5 @@
 <div class="col-sm-12 col-md-10 col-lg-8">
-      <div class="table-responsive-sm">
+    <div class="table-responsive-sm">
 
       <table class="table table-bordered">
         <thead>
@@ -19,7 +19,7 @@
 
             </th>
             <th scope="col">
-              <button name="do_select" type="submit" class="btn btn-secondary btn-lg text-center">Применить</button>
+              <button name="do_select" type="submit" class="btn btn-secondary btn-lg text-center" id="do_sel">Применить</button>
             </form>
             </th>
           </tr>
@@ -29,7 +29,7 @@
             <td class="fw-bold text-center" colspan="3">Фактические значения мощности и частоты от анализатора качества </td>
           </tr>
           <tr class="tb_tr_t">
-            <td class="tb_th_fs_t">Мощность (P_ac_10)</td>
+            <td class="tb_th_fs_t">Мощность (p_ac_10)</td>
             
               <td class="text-end">
                 <div id="p_ac_10">
@@ -40,7 +40,7 @@
             
           </tr>
           <tr class="tb_tr_t">
-            <td>Частота (F_AC_10)</td>
+            <td>Частота (f_ac_10)</td>
               <td class="text-end">
                 <div id="f_ac_10">
                   <?php echo $myarr[$arrAssoc['f_ac_10']]; ?>
@@ -49,6 +49,16 @@
             <td>Гц</td>
         </tbody>
       </table>
-
-      </div>
     </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div id="container" style="height: 400px; min-width: 310px"></div>
+  </div>
+</div>
+
+<?php 
+  include "./graphik/chart_off.php";
+ ?>
