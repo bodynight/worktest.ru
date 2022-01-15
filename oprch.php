@@ -324,56 +324,36 @@
   <script src="jscript/bootstrap.bundle.min.js"></script>
   <script>
     var timerIdo = setInterval(function(){}, 1000);
-    var arrAss = <?php echo json_encode($arrAssoc);?>;
-    
 
-    function updateblock_oprch_off(obno)
+    function updateblock_oprch_off()
     {
-      $.get('logs/inv_log', function(data)
-       {
-          // Split the lines
-          lines = data.split('\n');
-          //проверка последнего эл-та массива если "" удаляем эл-т
-          if (lines[lines.length-1] == "") {lines.pop();}
-          lastline = lines[lines.length-1];
-          var items = lastline.split('\t');
-           $("#p_ac_10").text( items[arrAss['p_ac_10']] );
-           $("#f_ac_10").text( items[arrAss['f_ac_10']] );
-       });
+      $.get('dataIndex.php',{updateblock: 'oprch_off'}, function(data){
+                            data = JSON.parse(data);
+                            $("#p_ac_10").text( data['p_ac_10'] );
+                            $("#f_ac_10").text( data['f_ac_10'] );
+                        });
     }
 
-    function updateblock_oprch_pf_in(obno)
+    function updateblock_oprch_pf_in()
     {
-      $.get('logs/inv_log', function(data)
-       {
-          // Split the lines
-          lines = data.split('\n');
-          //проверка последнего эл-та массива если "" удаляем эл-т
-          if (lines[lines.length-1] == "") {lines.pop();}
-          lastline = lines[lines.length-1];
-          var items = lastline.split('\t');
-           $("#ac_p").text( items[arrAss['ac_p']] );
-           $("#in_f").text( items[arrAss['in_f']] );
-           $("#p_fx").text( items[arrAss['p_fx']] );
-           $("#in_lp").text( items[arrAss['in_lp']] );
-       });
+      $.get('dataIndex.php',{updateblock: 'oprch_pf_in'}, function(data){
+                            data = JSON.parse(data);
+                            $("#ac_p").text( data['ac_p'] );
+                            $("#in_f").text( data['in_f'] );
+                            $("#p_fx").text( data['p_fx'] );
+                            $("#in_lp").text( data['in_lp'] );
+                        });
     }
 
-    function updateblock_oprch_pf_an(obno)
+    function updateblock_oprch_pf_an()
     {
-      $.get('logs/inv_log', function(data)
-       {
-          // Split the lines
-          lines = data.split('\n');
-          //проверка последнего эл-та массива если "" удаляем эл-т
-          if (lines[lines.length-1] == "") {lines.pop();}
-          lastline = lines[lines.length-1];
-          var items = lastline.split('\t');
-           $("#p_ac_10").text( items[arrAss['p_ac_10']] );
-           $("#f_ac_10").text( items[arrAss['f_ac_10']] );
-           $("#p_fx").text( items[arrAss['p_fx']] );
-           $("#in_lp").text( items[arrAss['in_lp']] );
-       });
+      $.get('dataIndex.php',{updateblock: 'oprch_pf_an'}, function(data){
+                            data = JSON.parse(data);
+                            $("#p_ac_10").text( data['p_ac_10'] );
+                            $("#f_ac_10").text( data['f_ac_10'] );
+                            $("#p_fx").text( data['p_fx'] );
+                            $("#in_lp").text( data['in_lp'] );
+                        });
     }
 
     function setobn_oprch(val)

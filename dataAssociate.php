@@ -1,212 +1,28 @@
 
   <?php 
-  $lines = file("logs/inv_log");
-  $i = 0;
-  $arrAssoc = [];
-  $firstLine = explode("\t", $lines[0]);
-
-  foreach ($firstLine as $item) {
-    $result = preg_match('/\w+\b/',$item,$found);
-    if ($found[0] == 'Inverter_Operation_State'){
-        $arrAssoc += ['in_st' => $i];
-    }
-    if ($found[0] == 'PV_Inverter_Information'){
-        $arrAssoc += ['in_in' => $i];
-    }
-    if ($found[0] == 'PV_Inverter_Warning'){
-        $arrAssoc += ['in_wr' => $i];
-    }
-    if ($found[0] == 'PV_Inverter_Fault'){
-        $arrAssoc += ['in_fl' => $i];
-    }
-    if ($found[0] == 'PV_Inverter_Fault_SACK'){
-        $arrAssoc += ['in_fs' => $i];
-    }
-    if ($found[0] == 'PV_Input_DC_Information'){
-        $arrAssoc += ['dc_in' => $i];
-    }
-    if ($found[0] == 'PV_Input_DC_Warning'){
-        $arrAssoc += ['dc_wr' => $i];
-    }
-    if ($found[0] == 'PV_Output_AC_Information'){
-        $arrAssoc += ['ac_in' => $i];
-    }
-    if ($found[0] == 'PV_Output_AC_Warning'){
-        $arrAssoc += ['ac_wr' => $i];
-    }
-    if ($found[0] == 'PV_Output_AC_Fault'){
-        $arrAssoc += ['ac_fl' => $i];
-    }
-    if ($found[0] == 'PV_Output_AC_Fault_SACK'){
-        $arrAssoc += ['ac_fs' => $i];
-    }
-    if ($found[0] == 'StartMode'){
-        $arrAssoc += ['st_st' => $i];
-    }
-    if ($found[0] == 'PV_Voltage'){
-        $arrAssoc += ['pv_v' => $i];
-    }
-    if ($found[0] == 'PV_Current'){
-        $arrAssoc += ['pv_i' => $i];
-    }
-    if ($found[0] == 'PV_Power'){
-        $arrAssoc += ['pv_p' => $i];
-    }
-    if ($found[0] == 'DC_Isolation_Resistor'){
-        $arrAssoc += ['pv_r' => $i];
-    }
-    if ($found[0] == 'InvVoltL1_L2'){
-        $arrAssoc += ['in_v1' => $i];
-    }
-    if ($found[0] == 'InvVoltL2_L3'){
-        $arrAssoc += ['in_v2' => $i];
-    }
-    if ($found[0] == 'InvVoltL3_L1'){
-        $arrAssoc += ['in_v3' => $i];
-    }
-    if ($found[0] == 'InvCurrentL1'){
-        $arrAssoc += ['in_i1' => $i];
-    }
-    if ($found[0] == 'InvCurrentL2'){
-        $arrAssoc += ['in_i2' => $i];
-    }
-    if ($found[0] == 'InvCurrentL3'){
-        $arrAssoc += ['in_i3' => $i];
-    }
-    if ($found[0] == 'InvFrequency'){
-        $arrAssoc += ['in_f' => $i];
-    }
-    if ($found[0] == 'AmbientAirTemp'){
-        $arrAssoc += ['in_t' => $i];
-    }
-    if ($found[0] == 'GridVoltL1_L2'){
-        $arrAssoc += ['ac_v1' => $i];
-    }
-    if ($found[0] == 'GridVoltL2_L3'){
-        $arrAssoc += ['ac_v2' => $i];
-    }
-    if ($found[0] == 'GridVoltL3_L1'){
-        $arrAssoc += ['ac_v3' => $i];
-    }
-    if ($found[0] == 'GridFrequency'){
-        $arrAssoc += ['ac_f' => $i];
-    }
-    if ($found[0] == 'StartMode'){
-        $arrAssoc += ['in_sm' => $i];
-    }
-    if ($found[0] == 'InverterOFF'){
-        $arrAssoc += ['in_of' => $i];
-    }
-    if ($found[0] == 'CosPhi'){
-        $arrAssoc += ['ac_cs' => $i];
-    }
-    if ($found[0] == 'InvTotalApparentPower'){
-        $arrAssoc += ['ac_s' => $i];
-    }
-    if ($found[0] == 'InvTotalTruePower'){
-        $arrAssoc += ['ac_p' => $i];
-    }
-    if ($found[0] == 'InvTotalReactivePower'){
-        $arrAssoc += ['ac_q' => $i];
-    }
-    if ($found[0] == 'DayEnergy'){
-        $arrAssoc += ['w_d' => $i];
-    }
-    if ($found[0] == 'TotalEnergy'){
-        $arrAssoc += ['w_t' => $i];
-    }
-    if ($found[0] == 'TruePowerLimitPoint'){
-        $arrAssoc += ['in_lp' => $i];
-    }
-    if ($found[0] == 'TruePowerLimitPointRelease'){
-        $arrAssoc += ['in_lr' => $i];
-    }
-    if ($found[0] == 'CosPhiSetPointRelease'){
-        $arrAssoc += ['cs_sp' => $i];
-    }
-    if ($found[0] == 'diesel_ready'){
-        $arrAssoc += ['bms_pr' => $i];
-    }
-    if ($found[0] == 'I_diesel'){
-        $arrAssoc += ['bms_u2m' => $i];
-    }
-    if ($found[0] == 'P_diesel'){
-        $arrAssoc += ['bms_i2m' => $i];
-    }
-    if ($found[0] == 'BMS_Power_ref'){
-        $arrAssoc += ['b_ref' => $i];
-    }
-    if ($found[0] == 'BMS_U2_meas'){
-        $arrAssoc += ['u2_m' => $i];
-    }
-    if ($found[0] == 'BMS_I2_meas'){
-        $arrAssoc += ['i2_m' => $i];
-    }
-    if ($found[0] == 'BMS_E_charge'){
-        $arrAssoc += ['e_ch' => $i];
-    }
-    if ($found[0] == 'BMS_status'){
-        $arrAssoc += ['b_st' => $i];
-    }
-    if ($found[0] == 'P_fix'){
-        $arrAssoc += ['p_fx' => $i];
-    }
-    if ($found[0] == 'P_ac_10'){
-        $arrAssoc += ['p_ac_10' => $i];
-    }
-    if ($found[0] == 'F_ac_10'){
-        $arrAssoc += ['f_ac_10' => $i];
-    }
-    $i++;  
+  $arrSopost = ['Inverter_Operation_State' => 'in_st',  'PV_Inverter_Information' => 'in_in', 'PV_Inverter_Warning' => 'in_wr', 'PV_Inverter_Fault' => 'in_fl', 'PV_Inverter_Fault_SACK' => 'in_fs', 'PV_Input_DC_Information' => 'dc_in', 'PV_Input_DC_Warning' => 'dc_wr', 'PV_Output_AC_Information' => 'ac_in', 'PV_Output_AC_Warning' => 'ac_wr', 'PV_Output_AC_Fault' => 'ac_fl', 'PV_Output_AC_Fault_SACK' => 'ac_fs', 'StartMode' => 'st_st', 'PV_Voltage' => 'pv_v', 'PV_Current' => 'pv_i', 'PV_Power' => 'pv_p', 'DC_Isolation_Resistor' => 'pv_r', 'InvVoltL1_L2' => 'in_v1', 'InvVoltL2_L3' => 'in_v2', 'InvVoltL3_L1' => 'in_v3', 'InvCurrentL1' => 'in_i1', 'InvCurrentL2' => 'in_i2', 'InvCurrentL3' => 'in_i3', 'InvFrequency' => 'in_f', 'AmbientAirTemp' => 'in_t', 'GridVoltL1_L2' => 'ac_v1', 'GridVoltL2_L3' => 'ac_v2', 'GridVoltL3_L1' => 'ac_v3', 'GridFrequency' => 'ac_f', 'InverterOFF' => 'in_of', 'CosPhi' => 'ac_cs', 'InvTotalApparentPower' => 'ac_s', 'InvTotalTruePower' => 'ac_p', 'InvTotalReactivePower' => 'ac_q', 'DayEnergy' => 'w_d', 'TotalEnergy' => 'w_t', 'TruePowerLimitPoint' => 'in_lp', 'TruePowerLimitPointRelease' => 'in_lr', 'CosPhiSetPointRelease' => 'cs_sp', 'diesel_ready' => 'bms_pr', 'I_diesel' => 'bms_u2m', 'P_diesel' => 'bms_i2m', 'BMS_Power_ref' => 'b_ref', 'BMS_U2_meas' => 'u2_m', 'BMS_I2_meas' => 'i2_m', 'BMS_E_charge' => 'e_ch', 'BMS_status' => 'b_st', 'P_fix' => 'p_fx', 'P_ac_10' => 'p_ac_10', 'F_ac_10' => 'f_ac_10', 'Udc2' => 'u_dc2', 'Udc1' => 'u_dc1', 'Idc2_L1' => 'i_dc_l1', 'Idc2_L2' => 'i_dc_l2', 'Idc2_L3' => 'i_dc_l3', 'Idc2' => 'i_dc2', 'T1' => 't1', 'status' => 'dc_st', 'protect_word' => 'pr_w', 'Idc2_max_charge' => 'idc2_mc', 'Idc2_max_discharge' => 'idc2_md', 'Edc_charge' => 'edc_c', 'Edc_discharge' => 'edc_d'];
+  
+function addArrayAssoc($log, $arrS){
+   $i = 0;
+   $arr = [];
+   $lines = file($log);
+   $firstLine = explode("\t", $lines[0]);
+   foreach ($firstLine as $item) {
+        $result = preg_match('/\w+\b/',$item,$found);
+        if ( array_key_exists($found[0], $arrS) ){
+            $arr += [$arrS[$found[0]] => $log=="logs/inv_log" ? $i:"$i"];
+        }
+        $i++;  
   }
+  return $arr; 
+}
+$arrAssoc = addArrayAssoc("logs/inv_log", $arrSopost);
+$arrAssoc = array_merge($arrAssoc, addArrayAssoc("logs/dcdc_log", $arrSopost));
+if ($arrAssoc['st_st'] != ''){
+    $arrAssoc += ['in_sm' => $arrAssoc['st_st'] ];
+}
 
-  $lines = file("logs/dcdc_log");
-  $i = 0;
-  $firstLine = explode("\t", $lines[0]);
-  foreach ($firstLine as $item){
-    $result = preg_match('/\w+\b/',$item,$found);
-    if ($found[0] == 'Udc2'){
-      $arrAssoc += ['u_dc2' => "$i"];
-    }
-    if ($found[0] == 'Udc1'){
-      $arrAssoc += ['u_dc1' => "$i"];
-    }
-    if ($found[0] == 'Idc2_L1'){
-      $arrAssoc += ['i_dc_l1' => "$i"];
-    }
-    if ($found[0] == 'Idc2_L2'){
-      $arrAssoc += ['i_dc_l2' => "$i"];
-    }
-    if ($found[0] == 'Idc2_L3'){
-      $arrAssoc += ['i_dc_l3' => "$i"];
-    }
-    if ($found[0] == 'Idc2'){
-      $arrAssoc += ['i_dc2' => "$i"];
-    }
-    if ($found[0] == 'T1'){
-      $arrAssoc += ['t1' => "$i"];
-    }
-    if ($found[0] == 'status'){
-      $arrAssoc += ['dc_st' => "$i"];
-    }
-    if ($found[0] == 'protect_word'){
-      $arrAssoc += ['pr_w' => "$i"];
-    }
-    if ($found[0] == 'Idc2_max_charge'){
-      $arrAssoc += ['idc2_mc' => "$i"];
-    }
-    if ($found[0] == 'Idc2_max_discharge'){
-      $arrAssoc += ['idc2_md' => "$i"];
-    }
-    if ($found[0] == 'Edc_charge'){
-      $arrAssoc += ['edc_c' => "$i"];
-    }
-    if ($found[0] == 'Edc_discharge'){
-      $arrAssoc += ['edc_d' => "$i"];
-    }
-    $i++;
-  }
+// if (isset($_GET["letarr"]) && $_GET["letarr"] == 1){
+//     echo json_encode($arrAssoc);
+// }
 ?>
-
-
-

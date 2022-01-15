@@ -53,6 +53,7 @@
                         <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="5000">5c
                         <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="10000">10c
                         <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="60000">60c
+                        <input class="form-check-input ci" onclick="setobn(this)" name="radiobutton" type="radio" value="0" checked>Off
                     </th>
                 </tr>
             </form>
@@ -77,17 +78,6 @@
     </div>
       <div id="block">
       <?php
-            $txt = "./data/mydata.txt";
-          if(isset($_POST['key_txt']) && isset($_POST['value_txt'])) {
-                $data = $_POST['key_txt'] . ':' . $_POST['value_txt'] . "\r\n";
-                $ret=fopen($txt,"a");
-                if (flock($ret, LOCK_EX)) // установка исключительной блокировки на запись
-                  {
-                  fputs($ret,$data) or die("Ошибка записи"); // из массива в текст и записываем
-                  flock($ret, LOCK_UN); // снятие блокировки
-                  }
-                  fclose($ret);
-          }
 
 
           function get_array($log){
