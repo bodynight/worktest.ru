@@ -1,3 +1,7 @@
+.chart-container {
+    width: 200px;
+    height: 210px;
+}
  
 .tb_tr  {
   font-size: 10px;
@@ -40,9 +44,14 @@
   transition: all 0,25 ease;
 }
 
-.tb_tds:hover {
+.tb_tds:hover, .graf3:hover {
   background-color: #ccf;
   color: #52339a;
+}
+
+.graf3 {
+  cursor: pointer;
+  transition: all 0,25 ease;
 }
 
 .kv {
@@ -60,8 +69,6 @@
 
 .dalert {
   font-size: 11px;
-  height: 20px;
-  padding: 2px;
   vertical-align: middle;
 }
 .form-control-sm, .alert-success {

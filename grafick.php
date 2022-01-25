@@ -1,14 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
         <title>Chart</title>
 </head>
-
 <body>
-    
     <?php
     if(isset($_POST['id'])){$value_var = $_POST['id'];}//получаем переменную через ajax post
     ?>
@@ -36,33 +31,31 @@
                 </div>
     </div>
 
-
-
 <script>
-
     var name_title = <?php echo json_encode($value_var);?>;
     console.log(name_title);
     var data = [];
     var value_num = 0;
     var timerId_chart = setInterval(function(){}, 1000);
-    
 
     function static(){
+        //Запрос данныч по ключу переменной
         $.get('dataIndex.php',{chart_arg: name_title}, function(dat){
+            //Очищаем таймер для графика динамик
             clearInterval(timerId_chart);
+            //извлекаем и преобразовываем данные после аях запроса
             dat = JSON.parse(dat);
             data = dat['array'];
-            value_num = dat['get_num_val'];
             // Create the chart
             $('#divID-1').highcharts('StockChart',{
-            // Highcharts.stockChart('container1', {
-
                 plotOptions: {
                 series: {
                    turboThreshold: 0,
                     }
                 },
-
+                chart: {
+                    zoomType: 'xy'
+                },
                 time: {
                         useUTC: false
                         },
@@ -72,7 +65,7 @@
                     inputEditDateFormat:'%Y-%m-%d %H:%M:%S',
                     inputBoxWidth: 150,
                     buttonTheme: {
-                        width: 40
+                        width: 30
                     },
                     buttons: [{
                     count: 10,
@@ -113,6 +106,18 @@
 
                     },
 
+                    xAxis: {
+                    gridLineWidth: 2
+                        },
+
+                    yAxis: [{
+                        labels: {
+                                    align: 'left',
+                                    format: '{value}',
+                                    x: 3
+                                }
+                    }],
+
                     title: {
                         text: "Charts for " + name_title
                     },
@@ -128,22 +133,22 @@
                 });
             }
             
-    function dinamic(){        
+    function dinamic(){
+        //Запрос данныч по ключу переменной        
         $.get('dataIndex.php',{chart_arg: name_title}, function(dat){
+            //Очищаем таймер для графика динамик
             clearInterval(timerId_chart);
+            //извлекаем и преобразовываем данные после аях запроса
             dat = JSON.parse(dat);
             data = dat['array'];
             value_num = dat['get_num_val'];
             // Create the chart
             $('#divID-1').highcharts('StockChart',{
-                // Highcharts.stockChart('container2', {
                 chart: {
                     events: {
                         load: function () {
                             // set up the updating of the chart each second
                             var series = this.series[0];
-                            var lines = 0;
-                            var lastline = 0;
                             timerId_chart = setInterval(function () {
                                 function get_data_v(){
                                     $.get('dataIndex.php',{arg: name_title, val_arg: value_num}, function(data){
@@ -156,7 +161,8 @@
                                 get_data_v();
                             }, 1000);
                         }
-                    }
+                    },
+                    zoomType: 'xy'
                 },
 
                 plotOptions: {
@@ -174,7 +180,7 @@
                         inputEditDateFormat:'%Y-%m-%d %H:%M:%S',
                         inputBoxWidth: 150,
                         buttonTheme: {
-                            width: 40
+                            width: 30
                         },
                         buttons: [{
                         count: 10,
@@ -213,6 +219,18 @@
                         selected: 7
                 },
 
+                xAxis: {
+                        gridLineWidth: 1
+                            },
+
+                yAxis: [{
+                            labels: {
+                                        align: 'left',
+                                        format: '{value}',
+                                        x: 3
+                                    }
+                        }],
+
                 title: {
                     text: "Dynamically updated data " + name_title
                 },
@@ -231,16 +249,18 @@
             });
         });
     }
+    //Первичное построение графика
     $(document).ready(function(){
     static();
     });
+    //Обрабатываем радио кнопки по клику,очищаем div и вызываем нужный график
     $(document).on('click', '#rdb1', function(){
-        // clearInterval(timerId_chart);
+        clearInterval(timerId_chart);
         $("#divID-1").empty();
         static();
     });
     $(document).on('click', '#rdb2', function(){
-        // clearInterval(timerId_chart);
+        clearInterval(timerId_chart);
         $("#divID-1").empty();
         dinamic();
     });

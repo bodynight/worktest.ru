@@ -116,6 +116,72 @@ $arr_state_ibp = array(
         '18'=>'Пониж. P(Tmin)',
         '19'=>'Q(U-GRID)2'        
     );
+
+// Статус BMS
+    $arr_state_bms = array( 
+        '0'=>'Инициализация',
+        '1'=>'Отключено',
+        '2'=>'Отключается...',
+        '3'=>'Ожидание готовности подключения (синхронизация с основным инвертором)',
+        '4'=>'Выполнение подключения',
+        '5'=>'Подключено (идет заряд или разряд)',
+        '6'=>'Ошибка связи CAN',
+        '7'=>'Ошибка логики'
+    );
+
+// Статус DC-DC
+    $arr_state_dc = array( 
+        '0'=>'Инициализация',
+        '1'=>'Отключено',
+        '2'=>'Отключается...',
+        '3'=>'Ожидание готовности подключения (синхронизация с основным инвертором)',
+        '4'=>'Подготовка к подключению',
+        '5'=>'Готов к подключению',
+        '6'=>'Подключено',
+        '7'=>'Подключено и начался заряд/разряд',
+        '8'=>'Ошибка связи CAN',
+        '9'=>'Ошибка логики',
+        '10'=>'Тестовый режим',
+        '11'=>'Тест запущен'
+    );
+
+// Защиты DCDC:
+    $arr_protect_dc = array( 
+        '0'=>'нет защит',
+        '1'=>'F_UDC1_MAX',
+        '2'=>'F_UDC1_MIN',
+        '3'=>'F_UDC2_MAX',
+        '4'=>'F_UDC2_MIN',
+        '5'=>'F_MAX_IDC1',
+        '6'=>'F_MAX_IDC2',
+        '7'=>'F_RESERVED',
+        '8'=>'F_RESERVED',
+        '9'=>'F_RESERVED',
+        '10'=>'F_RESERVED',
+        '11'=>'F_RESERVED',
+        '12'=>'P_TEMPERATURE_MAX',
+        '13'=>'F_PDP_INV1',
+        '14'=>'F_PDP_I_MAX',
+        '15'=>'F_PDP_EXT_LOST',
+        '16'=>'F_PROGRAM_10K',
+        '17'=>'P_K7_BK_FAIL',
+        '18'=>'P_Q26_BK_FAIL',
+        '19'=>'P_Q4_BK_FAIL',
+        '20'=>'P_K91_BK_FAIL',
+        '21'=>'P_K7_SW-FAIL',
+        '22'=>'P_Q26_SW_FAIL',
+        '23'=>'P_Q4_SW_FAIL',
+        '24'=>'P_K91_SW_FAIL',
+        '25'=>'P_OVER_FREQUENCY_GRID',
+        '26'=>'P_DIFF_TEMP',
+        '27'=>'P_BATT_AIRFLOW',
+        '28'=>'P_UNDER_FREQUENCY_GRID',
+        '29'=>'P_DAY_MODE_ALGO_FAIL',
+        '30'=>'P_Q6_BK_FAIL',
+        '31'=>'P_Q6_SW_FAIL',
+        '32'=>'P_BMS_PROTECTION'
+    );
+
 // Статус связи
 
     $arr_cvim_state = array( 
@@ -285,38 +351,29 @@ function get_st_error($val,$arr){
         return $string;
 }
 
+// массив перебора ошибок
+$arr_perebor_arr_mes = array(
+                            'in_in'=>'Информация инвертора',
+                            'in_wr'=>'Предупр. Инв.',
+                            'ac_in'=>'Инф. перем. тока',
+                            'ac_wr'=>'Предупр. перем. тока',
+                            'dc_wr'=>'Предупр. пост. тока'
+);
+$arr_perebor_arr_err = array(
+                            'in_fl'=>'Ошибки Инв.',
+                            'in_fs'=>'Ошибки самоподтв. Инв.',
+                            'ac_fs'=>'Ошибки самоподтв. перем. тока',
+);
+//Создаем массив с расшифрованными кодами ошибок
 $err_str_arr = array();
-
-if ($myarr[$arrAssoc['in_in']] > 0){
-    $err_str_arr += ['Информация инвертора' => get_st_error($myarr[$arrAssoc['in_in']],$arr_mes['in_in'])];
-} 
-
-if ($myarr[$arrAssoc['in_wr']] > 0){
-    $err_str_arr += ['Предупр. Инв.' => get_st_error($myarr[$arrAssoc['in_wr']],$arr_mes['in_wr'])];
-} 
-
-if ($myarr[$arrAssoc['in_fl']] > 0){
-    $err_str_arr += ['Ошибки Инв.' => get_st_error($myarr[$arrAssoc['in_fl']],$arr_err['in_fl'])];
-} 
-
-if ($myarr[$arrAssoc['in_fs']] > 0){
-    $err_str_arr += ['Ошибки самоподтв. Инв.' => get_st_error($myarr[$arrAssoc['in_fs']],$arr_err['in_fs'])];
-} 
-
-if ($myarr[$arrAssoc['ac_in']] > 0){
-    $err_str_arr += ['Инф. перем. тока' => get_st_error($myarr[$arrAssoc['ac_in']],$arr_mes['ac_in'])];
-} 
-
-if ($myarr[$arrAssoc['ac_wr']] > 0){
-    $err_str_arr += ['Предупр. перем. тока' => get_st_error($myarr[$arrAssoc['ac_wr']],$arr_mes['ac_wr'])];
-} 
-
-if ($myarr[$arrAssoc['ac_fs']] > 0){
-    $err_str_arr += ['Ошибки самоподтв. перем. тока' => get_st_error($myarr[$arrAssoc['ac_fs']],$arr_err['ac_fs'])];
-} 
-
-if ($myarr[$arrAssoc['dc_wr']] > 0){
-    $err_str_arr += ['Предупр. пост. тока' => get_st_error($myarr[$arrAssoc['dc_wr']],$arr_mes['dc_wr'])];
-} 
-
+foreach ($arr_perebor_arr_mes as $key => $value) {
+    if ($arr_data_in[$arrAssoc[$key]] > 0){
+        $err_str_arr += [$value => get_st_error($arr_data_in[$arrAssoc[$key]],$arr_mes[$key])];
+    }
+}
+foreach ($arr_perebor_arr_err as $key => $value) {
+    if ($arr_data_in[$arrAssoc[$key]] > 0){
+        $err_str_arr += [$value => get_st_error($arr_data_in[$arrAssoc[$key]],$arr_err[$key])];
+    }
+}
 ?>

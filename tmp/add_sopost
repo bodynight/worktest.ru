@@ -1,0 +1,7 @@
+'Voltage L1-N' => 'jd_v1',
+    'Voltage L2-N' => 'jd_v2',
+    'Voltage L3-N' => 'jd_v3',
+    'Apparent current L1-N' => 'jd_i1',
+    'Apparent current L2-N' => 'jd_i2',
+    'Apparent current L3-N' => 'jd_i3',
+    'Psum3' => 'jd_p'

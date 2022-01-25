@@ -7,6 +7,11 @@
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
+                  <ul class="navbar-nav">
+                    <li class="nav-item ">
+                      <a class= "nav-link active" href="present.php">Презентация</a>
+                    </li>
+                  </ul>
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item ">
                       <a class= <?php echo isset($_SESSION['logged_user']) && $_SESSION['logged_user']->role == 'admin' ? "nav-link active" : '"nav-link disabled" tabindex="-1" aria-disabled="true"' ; ?>  aria-current="page" href="oprch.php">ОПРЧ</a>

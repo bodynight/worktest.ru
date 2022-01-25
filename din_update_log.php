@@ -32,7 +32,7 @@
 
   update_log("logs/inv_log");
   update_log("logs/dcdc_log");
-
+  update_log("logs/janitza_diesel");
   echo 'Hello';
 
 ?>
