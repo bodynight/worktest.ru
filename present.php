@@ -28,7 +28,8 @@
         <div id="d_ac_out" class="chart-container"></div>
         <div id="batary" class="chart-container"></div>
         <div id="dc_dc_out" class="chart-container"></div>
-      
+        <div id="DGU"><img id="img" src="../image/smoke.png"/></div>
+        <div id="DGU2"><img id="img2" src="../image/clear.png"/></div>
     </div>
   </div>
 <script src="jscript/bootstrap.bundle.min.js"></script>

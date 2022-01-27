@@ -53,6 +53,13 @@ $(document).ready(function(){
    updateblock();
 });
 
+function clear_timer(){
+  clearInterval(timerId);
+  if(typeof timerId_chart !== 'undefined'){
+    clearInterval(timerId_chart);
+  }
+}
+
 $(document).on('click', '#btn-submit1', function(){
   if(date_time != 0){
     clearInterval(timerId);

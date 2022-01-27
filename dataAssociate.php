@@ -1,6 +1,6 @@
 
   <?php 
-  $arrSopost = [
+$arrSopost = [
     'Inverter_Operation_State' => 'in_st',
     // 'PV_Inverter_Information' => 'in_in',
     'PV_Inverter_Warning' => 'in_wr',
@@ -69,11 +69,14 @@
     'Apparent current L1-N' => 'jd_i1',
     'Apparent current L2-N' => 'jd_i2',
     'Apparent current L3-N' => 'jd_i3',
-    'Psum3' => 'jd_p'
+    'Psum3' => 'jd_p',
+    'diesel_ready' => 'di_ready',
+    'diesel_operating' => 'di_oper'
 ];
 $arr_jd_key = ['jd_v1','jd_v2','jd_v3','jd_i1','jd_i2','jd_i3','jd_p'];
 $arr_dc_key = ['u_dc2', 'u_dc1', 'i_dc_l1', 'i_dc_l2', 'i_dc_l3', 'i_dc2', 't1', 'dc_st', 'pr_w', 'idc2_mc', 'idc2_md', 'edc_c', 'edc_d'];
-$arr_in_key = ['in_st', 'in_in', 'in_wr', 'in_fl', 'in_fs', 'dc_in', 'dc_wr', 'ac_in', 'ac_wr', 'ac_fl', 'ac_fs', 'st_st','pv_v', 'pv_i', 'pv_p', 'pv_r', 'in_v1', 'in_v2', 'in_v3', 'in_i1', 'in_i2', 'in_i3', 'in_f', 'in_t', 'ac_v1', 'ac_v2', 'ac_v3', 'ac_f', 'in_sm', 'in_of', 'ac_cs', 'ac_s', 'ac_p', 'ac_q', 'w_d', 'w_t', 'in_lp', 'in_lr',  'cs_sp', 'b_ref', 'u2_m', 'i2_m', 'e_ch', 'b_st'];
+$arr_in_key = ['in_st', 'in_in', 'in_wr', 'in_fl', 'in_fs', 'dc_in', 'dc_wr', 'ac_in', 'ac_wr', 'ac_fl', 'ac_fs', 'st_st','pv_v', 'pv_i', 'pv_p', 'pv_r', 'in_v1', 'in_v2', 'in_v3', 'in_i1', 'in_i2', 'in_i3', 'in_f', 'in_t', 'ac_v1', 'ac_v2', 'ac_v3', 'ac_f', 'in_sm', 'in_of', 'ac_cs', 'ac_s', 'ac_p', 'ac_q', 'w_d', 'w_t', 'in_lp', 'in_lr',  'cs_sp', 'b_ref', 'u2_m', 'i2_m', 'e_ch', 'b_st', 'di_ready', 'di_oper'];
+
   
 function addArrayAssoc($log, $arrS){
    $i = 0;

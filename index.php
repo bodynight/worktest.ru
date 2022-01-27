@@ -15,7 +15,7 @@
   <script src="jscript/highchart/boost.js"></script>
   <link rel="stylesheet" href="style_css/my_style.css">
 
-  <title>My Test</title>
+  <title>Параметры ИС39</title>
 </head>
 <body>
    <?php require 'db.php'; ?>
@@ -205,11 +205,13 @@
                 <th class="text-center lh-1 graf3" id="jd_v" scope="col" colspan="3">Uдг<br> L1 L2 L3</th>
                 <th class="text-center lh-1 graf3" id="jd_i" scope="col" colspan="3">Iдг<br> L1 L2 L3</th>
                 <th class="text-center lh-1" scope="col" >Pдг</th>
+                <th class="text-center lh-1" scope="col" >ДГ гот.</th>
+                <th class="text-center lh-1" scope="col" >ДГ подк.</th>
               </tr>
             </thead>
               <tr class="tb_td">
                 <?php
-                      $arrey_div1 = array("jd_v1", "jd_v2", "jd_v3", "jd_i1", "jd_i2", "jd_i3", "jd_p");
+                      $arrey_div1 = array("jd_v1", "jd_v2", "jd_v3", "jd_i1", "jd_i2", "jd_i3", "jd_p", 'di_ready', 'di_oper');
                        foreach ($arrey_div1 as $value) {?>
                       <td id = <?php echo $value ?> class = "text-center lh-1"><div class="tb_tds"></div> </td>
                 <?php } ?>

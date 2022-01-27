@@ -1,3 +1,7 @@
+#img, #img2 {
+    object-fit: cover;
+}
+
 .chart-container {
     width: 200px;
     height: 210px;

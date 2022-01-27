@@ -9,7 +9,7 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                   <ul class="navbar-nav">
                     <li class="nav-item ">
-                      <a class= "nav-link active" href="present.php">Презентация</a>
+                      <a class= "nav-link active" href="present.php" onclick="clear_timer()" >Презентация</a>
                     </li>
                   </ul>
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">

@@ -3,9 +3,10 @@
    $f_inv = "logs/inv_log";
    $f_dc =  "logs/dcdc_log";
    $f_jd =  "logs/janitza_diesel";
-
+$date_pr =  time() - 3;
+   $date_pr = date("Y-m-d H:i:s", $date_pr);
    //Создание массива данных из нужгого лога из последней строки
-   function get_array($log){
+   function get_array($log, $date_p){
       if(isset($_GET['date']) && $_GET['date'] != 0 ){
          $find = $_GET['date'];
          $file = fopen($log, "r") or die("Unable to open file!");
@@ -18,6 +19,27 @@
                              }
                      }
               fclose($file);
+      }else if(isset($_GET['present'])){
+         $myarr = [];
+            $find = $date_p;
+            $file = fopen($log, "r") or die("Unable to open file!");
+                     while(!feof($file)){
+                         $row = fgets($file);
+                         $pos = strpos($row, $find);
+                         if ($pos === false) {
+                         } else {
+                             $myarr = explode("\t", $row);//создание массива из строки вхождения
+                                }
+                        }
+            fclose($file);
+            if(empty($myarr)){
+               $lines = file($log);
+               $last = $lines[count($lines)-1];
+               if(preg_match('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $last)){
+                  $myarr = explode("\t", $lines[count($lines)-1]); //или последняя строка из массива
+               
+               }
+            }
       }else{
          $lines = file($log);
          $last = $lines[count($lines)-1];
@@ -27,9 +49,9 @@
       }
       return $myarr;
    }
-   $arr_data_in = get_array($f_inv);
-   $arr_data_dc = get_array($f_dc);
-   $arr_data_jd = get_array($f_jd);
+   $arr_data_in = get_array($f_inv, $date_pr);
+   $arr_data_dc = get_array($f_dc, $date_pr);
+   $arr_data_jd = get_array($f_jd, $date_pr);
    include 'ErrorMessage.php';
    $arr_data = [];
    //создание ассоциативного массива ключ значение из нужного массива 
@@ -40,6 +62,14 @@
          $arr_data += [$key => $arr_data_dc[$value]];
       }else if(in_array($key, $arr_in_key)){
          $arr_data += [$key => $arr_data_in[$value]];
+      }
+   }
+   foreach ($arr_data as $value) {
+      if (is_nan($value)) {
+         exit(header("Location:".$_SERVER['REQUEST_URI'])); // перенаправление на ту же страницу
+      }
+      if (is_null($value)) {
+         exit(header("Location:".$_SERVER['REQUEST_URI'])); // перенаправление на ту же страницу
       }
    }
    //подготовка данных для аях запроса, на страницу index.php для таблицы 
@@ -166,84 +196,70 @@
 
    //Формируем ассоциативный массив для статусов фона презентации от логического кода
       //первая цифра фэм>0 => 1 , фэм=0 => 0
-      //первая цифра invertor/AC>0 => 1 , invertor/AC=0 => 0, invertor/AC<0 => -1
+      //вторая цифра invertor/AC>0 => 1 , invertor/AC=0 => 0, invertor/AC<0 => -1
       // третья цифра по аналогии для ДГУ
       // четвертая для мощности DC/DC 
       // пятая для условий DC/DC
    $fon_accoc = [
                   '1101' => 'url(../image/gen_fem_akym_charg_dcac_plus.jpg)',
+                  '11011' => 'url(../image/gen_fem_akym_charg_dcac_plus.jpg)',
                   '11001' => 'url(../image/gen_fem_akym_charg_dcac_plus.jpg)',
                   '110-1' => 'url(../image/gen_fem_akym_disch_dcac_plus.jpg)',
                   '1100' => 'url(../image/gen_fem_akym_charg_dcac_nul.jpg)',
                   '111-1' => 'url(../image/all_gen.jpg)',
                   '010-1' => 'url(../image/dcacPlus_akumMinus.jpg)',
                   '0-101' => 'url(../image/pv_pMinus_pdc_dc_outPlus.jpg)',
+                  '0-1011' => 'url(../image/pv_pMinus_pdc_dc_outPlus.jpg)',
                   '0-1001' => 'url(../image/pv_pMinus_pdc_dc_outPlus.jpg)',
                   '0-100' => 'url(../image/pv_pMinus.jpg)',
                   '0000' => 'url(../image/allNul.jpg)',
+                  '00001' => 'url(../image/allNulzar.jpg)',
+                  '0001' => 'url(../image/allNulzar.jpg)',
+                  '01001' => 'url(../image/acPlus_stZar.jpg)',
+                  '01011' => 'url(../image/acPlus_stZar.jpg)',
                   '1001' => 'url(../image/femPlus_dcdcPlus.jpg)',
+                  '10011' => 'url(../image/femPlus_dcdcPlus.jpg)',
                   '10001' => 'url(../image/femPlus_dcdcPlus.jpg)',
                   '1-101' => 'url(../image/fem_dcacMinus_dcdcPlus.jpg)',
+                  '1-1011' => 'url(../image/fem_dcacMinus_dcdcPlus.jpg)',
                   '1-1001' => 'url(../image/fem_dcacMinus_dcdcPlus.jpg)',
-                  '1-100' => 'url(../image/pv_pMinus_femPlus.jpg)'
+                  '1-100' => 'url(../image/pv_pMinus_femPlus.jpg)',
+                  "011-1" => 'url(../image/gen_DGU_AKB.jpg)',
+                  '1110' => 'url(../image/fem_dgu_acPlus.jpg)'
                ];
-   //подготовка данных для аях запроса, на страницу present.php для графика динамик
+   //подготовка данных для аях запроса, на страницу present.php bla bla
    if(isset($_GET['present'])){
+
       $logical_st = "";
       $st_chsrge = 0;
       $pv_p = $arr_data['pv_p'] * 1;
       $jd_p = $arr_data['jd_p'] * 1;
       $pdc_dc_out = (int)($arr_data['u_dc2'] * $arr_data['i_dc2'] / 1000);
       $ac_p = $arr_data['ac_p'] * 1;
-      $fem = abs($pv_p - $jd_p + $pdc_dc_out);
-      $bat = $pdc_dc_out;//временно
-      //определяем статус заряда акб
+      if(abs($pv_p - $ac_p) >= 2){
+            $ac_p = $pv_p - 1;
+      }
+      $fem = $pv_p - $jd_p + $pdc_dc_out;
+      if($fem <= 2){$fem = 0;}
+      $sun_info1 = date_sun_info(time(), 33.39, 45.14); // strtotime("$year-$month-$day")
+      $sun_info2 = date_sun_info((time() + 86400), 33.39, 45.14);
+      if(time() > $sun_info1['sunset'] && time() < $sun_info2['civil_twilight_begin']){
+         $fem = 0;
+      };
+      $bat = $arr_data['e_ch'] * 1;
       if($arr_data['b_st'] * 1 == 5 && $arr_data['dc_st'] * 1 == 7 && $arr_data['i_dc2'] * 1 >= 0){
          $st_chsrge = 1;
       }
+      $di_ready = $arr_data['di_ready'] * 1;
+      $di_oper = $arr_data['di_oper'] * 1;
       //шифруем значения в логические статусы и формируем логический код в $logical_st
       if($fem > 0){$logical_st = $logical_st . '1';}else{$logical_st = $logical_st . '0';}
       if($pv_p > 0){$logical_st = $logical_st . '1';}else if($pv_p < 0){$logical_st = $logical_st . '-1';}else{$logical_st = $logical_st . '0';}
       if($jd_p > 0){$logical_st = $logical_st . '1';}else{$logical_st = $logical_st . '0';}
       if($pdc_dc_out > 0){$logical_st = $logical_st . '1';}else if($pdc_dc_out < 0){$logical_st = $logical_st . '-1';}else{$logical_st = $logical_st . '0';}
       if($st_chsrge == 1){$logical_st = $logical_st . '1';}
-
-      // if(array_key_exists($logical_st, $fon_accoc)){
-      //    $fon = $fon_accoc[$logical];
-      // }else{
-      //    $fon = 'url(../image/неопределен.jpg)';
-      // }
-
-      if($fem > 0 && $pv_p > 0 && $jd_p == 0 && $pdc_dc_out > 0){
-         $fon = 'url(../image/gen_fem_akym_charg_dcac_plus.jpg)';
-      }else if($fem > 0 && $pv_p > 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge == 1){
-         $fon = 'url(../image/gen_fem_akym_charg_dcac_plus.jpg)';
-      }else if($fem > 0 && $pv_p > 0 && $jd_p == 0 && $pdc_dc_out < 0){
-         $fon = 'url(../image/gen_fem_akym_disch_dcac_plus.jpg)';
-      }else if($fem > 0 && $pv_p > 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge != 1){
-         $fon = 'url(../image/gen_fem_akym_charg_dcac_nul.jpg)';
-      }else if($fem > 0 && $pv_p > 0 && $jd_p > 0 && $pdc_dc_out < 0){
-         $fon = 'url(../image/all_gen.jpg)';
-      }else if($fem == 0 && $pv_p > 0 && $jd_p == 0 && $pdc_dc_out < 0){
-         $fon = 'url(../image/dcacPlus_akumMinus.jpg)';
-      }else if($fem == 0 && $pv_p < 0 && $jd_p == 0 && $pdc_dc_out > 0){
-         $fon = 'url(../image/pv_pMinus_pdc_dc_outPlus.jpg)';
-      }else if($fem == 0 && $pv_p < 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge == 1){
-         $fon = 'url(../image/pv_pMinus_pdc_dc_outPlus.jpg)';
-      }else if($fem == 0 && $pv_p < 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge != 1){
-         $fon = 'url(../image/pv_pMinus.jpg)';
-      }else if($fem == 0 && $pv_p == 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge != 1){
-         $fon = 'url(../image/allNul.jpg)';
-      }else if($fem > 0 && $pv_p == 0 && $jd_p == 0 && $pdc_dc_out > 0){
-         $fon = 'url(../image/femPlus_dcdcPlus.jpg)';
-      }else if($fem > 0 && $pv_p == 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge == 1){
-         $fon = 'url(../image/femPlus_dcdcPlus.jpg)';
-      }else if($fem > 0 && $pv_p < 0 && $jd_p == 0 && $pdc_dc_out > 0){
-         $fon = 'url(../image/fem_dcacMinus_dcdcPlus.jpg)';
-      }else if($fem > 0 && $pv_p < 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge == 1){
-         $fon = 'url(../image/fem_dcacMinus_dcdcPlus.jpg)';
-      }else if($fem > 0 && $pv_p < 0 && $jd_p == 0 && $pdc_dc_out == 0 && $st_chsrge != 1){
-         $fon = 'url(../image/pv_pMinus_femPlus.jpg)';
+      if(array_key_exists($logical_st, $fon_accoc)){
+         $fon = $fon_accoc[$logical_st];
       }else{
          $fon = 'url(../image/неопределен.jpg)';
       }
@@ -255,9 +271,10 @@
          "fem" => $fem,
          'bat' => $bat,
          'fon' => $fon,
+         'di_ready' => $di_ready,
+         'di_oper' => $di_oper,
          'logical' => $logical_st
       ));
       
    }
  ?>
-
