@@ -227,7 +227,7 @@ $date_pr =  time() - 3;
                   "011-1" => 'url(../image/gen_DGU_AKB.jpg)',
                   '1110' => 'url(../image/fem_dgu_acPlus.jpg)'
                ];
-   //подготовка данных для аях запроса, на страницу present.php bla bla
+   //подготовка данных для аях запроса, на страницу present.php bla bla gjg
    if(isset($_GET['present'])){
 
       $logical_st = "";
